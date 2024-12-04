@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#enviroment variables
+.env
+
+#database data
+db/

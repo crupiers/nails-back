@@ -1,0 +1,23 @@
+services:
+  js_nails_db:
+    container_name: js_nails_db
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_USER_PASSWORD}
+
+    ports:
+      - "3306:3306"
+    volumes: #volúmenes anónimos o bind mount.
+      - ${PROJECT_PATH}:/var/lib/mysql
+
+    #restart: no
+    #networks:
+    #  - red-pa
+#networks:
+#  red-pa:
+#    driver: bridge
+#volumes:
+#  db_data:
