@@ -14,7 +14,7 @@ public class ItemServicioDTO extends TipoServicioDTO {
     //private String observaciones;
 
     public ItemServicioDTO(ItemServicio model) {
-        //this.observaciones=model.getObservacion();
+        this.observacion=model.getObservacion();
         this.precio=model.getPrecio();
         this.tipoServicio=model.getTipoServicio().getNombre();
         this.tipoServicioId=model.getTipoServicio().getId();

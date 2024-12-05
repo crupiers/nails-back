@@ -83,7 +83,7 @@ public class ServicioService implements IServicioService {
             logger.info("entra for");
 
             TipoServicio tipoServicio = tipoServicioService.buscarPorId(elemento.getTipoServicioId());
-            String observacion = elemento.getObservaciones();
+            String observacion = elemento.getObservacion();
             ItemServicio item = new ItemServicio(newModel, tipoServicio, precio,observacion);
 
             itemServicioService.guardar(item);

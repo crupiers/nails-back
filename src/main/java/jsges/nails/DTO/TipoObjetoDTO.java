@@ -6,4 +6,5 @@ import lombok.Data;
 public class TipoObjetoDTO {
     public Integer id;
     public String nombre;
+    public String observacion;
 }
