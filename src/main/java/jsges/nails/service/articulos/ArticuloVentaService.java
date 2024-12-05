@@ -62,7 +62,7 @@ public class ArticuloVentaService implements IArticuloVentaService{
         Integer idLinea = model.linea;
 
         ArticuloVenta newModel =  new ArticuloVenta();
-        newModel.setDenominacion(model.denominacion);
+        newModel.setNombre(model.denominacion);
         newModel.setLinea(lineaService.buscarPorId(idLinea));
 
         //ArticuloVenta modelSave= modelService.guardar(newModel);
@@ -134,7 +134,7 @@ public ArticuloVenta actualizar(Integer id, ArticuloVentaDTO modelRecibido){
         throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
     }
     logger.info("articulo " +model);
-    model.setDenominacion(modelRecibido.denominacion);
+    model.setNombre(modelRecibido.denominacion);
     model.setLinea(lineaService.buscarPorId(modelRecibido.linea));
     modelRepository.save(model);
     return     modelRepository.save(model);

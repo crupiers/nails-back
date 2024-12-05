@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Cliente extends TipoObjeto implements Serializable {
+public class Cliente extends TipoObjeto {
 
         @Column(columnDefinition = "TEXT")
         String razonSocial;

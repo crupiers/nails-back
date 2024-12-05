@@ -145,7 +145,7 @@ public class LineaService implements ILineaService {
         //if (model == null){
         //    throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         //}
-        model.setDenominacion(modelRecibido.denominacion);
+        model.setNombre(modelRecibido.denominacion);
         return new LineaDTO(this.guardar(model));
 
     }
