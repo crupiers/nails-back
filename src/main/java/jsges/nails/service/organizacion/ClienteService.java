@@ -2,6 +2,7 @@ package jsges.nails.service.organizacion;
 
 import jsges.nails.DTO.Organizacion.ClienteDTO;
 import jsges.nails.domain.organizacion.Cliente;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
 import jsges.nails.repository.organizacion.ClienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,14 +23,25 @@ public class ClienteService implements IClienteService {
     private ClienteRepository clienteRepository;
     private static final Logger logger = LoggerFactory.getLogger(ClienteService.class);
     @Override
-    public List<Cliente> listar() {
-        return clienteRepository.buscarNoEliminados();
+    public List<ClienteDTO> listar() {
+
+        List<ClienteDTO> listadoDTO    =  new ArrayList<>();
+        List<Cliente> list = clienteRepository.buscarNoEliminados();
+
+        list.forEach((model) -> {
+            listadoDTO.add(new ClienteDTO(model));
+        });
+        return listadoDTO;
     }
 
     @Override
     public Cliente buscarPorId(Integer id) {
-        Cliente model = clienteRepository.findById(id).orElse(null);
-        return model;
+
+        Cliente cliente =  clienteRepository.findById(id).orElse(null);
+        if(cliente == null)
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+
+        return cliente;
     }
 
     @Override
@@ -37,8 +50,18 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public void eliminar(Cliente cliente) {
-          clienteRepository.save(cliente);
+    public Void eliminar(Integer id) {
+
+        Cliente model = this.buscarPorId(id);
+        if (model == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+
+        model.setEstado(1);
+
+        this.guardar(model);
+
+         // clienteRepository.save(model);
+          return null;
     }
 
     @Override
@@ -50,23 +73,37 @@ public class ClienteService implements IClienteService {
         return clienteRepository.findAll(pageable);
     }
 
-    public Page<ClienteDTO> findPaginated(Pageable pageable, List<ClienteDTO> clientes) {
+    public Page<ClienteDTO> findPaginated(Pageable pageable, String consulta) {
+
+        List<Cliente> listado = this.listar(consulta);
+        List<ClienteDTO> listadoDTO    =  new ArrayList<>();
+        listado.forEach((model) -> {
+            listadoDTO.add(new ClienteDTO(model));
+        });
+
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<ClienteDTO> list;
-        if (clientes.size() < startItem) {
+        if (listadoDTO.size() < startItem) {
             list = Collections.emptyList();
         } else {
-            int toIndex = Math.min(startItem + pageSize, clientes.size());
-            list = clientes.subList(startItem, toIndex);
+            int toIndex = Math.min(startItem + pageSize, listadoDTO.size());
+            list = listadoDTO.subList(startItem, toIndex);
         }
 
         Page<ClienteDTO> bookPage
-                = new PageImpl<ClienteDTO>(list, PageRequest.of(currentPage, pageSize), clientes.size());
+                = new PageImpl<ClienteDTO>(list, PageRequest.of(currentPage, pageSize), listadoDTO.size());
 
         return bookPage;
     }
 
+    public Cliente actualizar(Integer id, Cliente modelRecibido) {
+        Cliente model = this.buscarPorId(id);
+        if (model == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+
+        return this.guardar(modelRecibido);
+    }
 
 }

@@ -8,17 +8,20 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface IClienteService {
-    public List<Cliente> listar();
+    public List<ClienteDTO> listar();
 
     public Cliente buscarPorId(Integer id);
 
     public Cliente guardar(Cliente cliente);
 
-    public void eliminar(Cliente cliente);
+    public Void eliminar(Integer id);
 
       public List<Cliente> listar(String consulta);
 
     public Page<Cliente> getClientes(Pageable pageable);
 
-    public Page<ClienteDTO> findPaginated(Pageable pageable, List<ClienteDTO> clientes);
+    public Page<ClienteDTO> findPaginated(Pageable pageable, String consulta);
+
+    public Cliente actualizar(Integer id, Cliente modelRecibido);
+
 }
