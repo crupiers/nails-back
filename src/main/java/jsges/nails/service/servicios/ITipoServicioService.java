@@ -13,18 +13,20 @@ public interface ITipoServicioService {
 
     public TipoServicio buscarPorId(Integer id);
 
-    public TipoServicio guardar(TipoServicio model);
+    public TipoServicio guardar(TipoServicioDTO model);
 
-    public void eliminar(TipoServicio model);
+    public Void eliminar(Integer id);
 
     public List<TipoServicio> listar(String consulta);
 
     public Page<TipoServicio> getTiposServicios(Pageable pageable);
 
-    public Page<TipoServicio> findPaginated(Pageable pageable,List<TipoServicio> tipoServicios);
+    public Page<TipoServicio> findPaginated(Pageable pageable,String consulta);
 
 
     public List<TipoServicio> buscar(String consulta);
 
     public TipoServicio newModel(TipoServicioDTO model);
+
+    public TipoServicio actualizar(Integer id, TipoServicio modelRecibido);
 }

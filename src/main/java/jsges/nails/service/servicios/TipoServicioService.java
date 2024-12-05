@@ -1,6 +1,7 @@
 package jsges.nails.service.servicios;
 import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.servicios.TipoServicio;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
 import jsges.nails.repository.servicios.TipoServicioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -28,14 +31,30 @@ public class TipoServicioService implements ITipoServicioService {
 
     @Override
     public TipoServicio buscarPorId(Integer id) {
-        return modelRepository.findById(id).orElse(null);
+
+        TipoServicio model = modelRepository.findById(id).orElse(null);
+        if(model == null)
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+
+
+        return model;
     }
 
 
 
     @Override
-    public TipoServicio guardar(TipoServicio model) {
-        return modelRepository.save(model);
+    public TipoServicio guardar(TipoServicioDTO model) {
+
+        List<TipoServicio> list = this.buscar(model.denominacion);
+        if (!list.isEmpty()){
+            throw new NullPointerException();
+            //return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            //throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la denominacion: " + model.denominacion);
+        }
+
+        TipoServicio nuevoModelo = this.newModel(model);
+
+        return modelRepository.save(nuevoModelo);
     }
 
 
@@ -43,14 +62,21 @@ public class TipoServicioService implements ITipoServicioService {
     public TipoServicio newModel(TipoServicioDTO modelDTO) {
         TipoServicio model =  new TipoServicio();
         model.setDenominacion(modelDTO.denominacion);
-        return guardar(model);
+        return modelRepository.save(model);
     }
 
 
     @Override
-    public void eliminar(TipoServicio model) {
+    public Void eliminar(Integer id) {
+
+        TipoServicio model = this.buscarPorId(id);
+        if (model == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+
+        model.setEstado(1);
 
         modelRepository.save(model);
+        return null;
     }
 
     @Override
@@ -70,7 +96,10 @@ public class TipoServicioService implements ITipoServicioService {
 
 
     @Override
-    public Page<TipoServicio> findPaginated(Pageable pageable, List<TipoServicio>lineas) {
+    public Page<TipoServicio> findPaginated(Pageable pageable, String consulta) {
+
+        List<TipoServicio> lineas = this.listar(consulta);
+
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -86,6 +115,14 @@ public class TipoServicioService implements ITipoServicioService {
                 = new PageImpl<TipoServicio>(list, PageRequest.of(currentPage, pageSize), lineas.size());
 
         return bookPage;
+    }
+
+    public TipoServicio actualizar(Integer id, TipoServicio modelRecibido) {
+        TipoServicio model = this.buscarPorId(id);
+        if (model == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+
+        return modelRepository.save(model);
     }
 
 }

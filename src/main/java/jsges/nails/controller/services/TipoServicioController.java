@@ -29,62 +29,37 @@ public class TipoServicioController {
     }
 
     @GetMapping({"/tiposServicios"})
-    public List<TipoServicio> getAll() {
-        List<TipoServicio> tipoServicios = this.modelService.listar();
-        return tipoServicios;
+    public ResponseEntity<List<TipoServicio>> getAll() {
+        return ResponseEntity.ok(modelService.listar());
     }
 
     @GetMapping({"/tiposServiciosPageQuery"})
     public ResponseEntity<Page<TipoServicio>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "${max_page}") int size) {
-        List<TipoServicio> listado = modelService.listar(consulta);
-        Page<TipoServicio> bookPage = modelService.findPaginated(PageRequest.of(page, size),listado);
-        return ResponseEntity.ok().body(bookPage);
+        return ResponseEntity.ok().body(modelService.findPaginated(PageRequest.of(page, size),consulta));
     }
 
 
     @PostMapping("/tiposServicios")
     public  ResponseEntity<TipoServicio>  agregar(@RequestBody TipoServicioDTO model){
-        List<TipoServicio> list = modelService.buscar(model.denominacion);
-        if (!list.isEmpty()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-           // throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la denominacion: " + model.denominacion);
-        }
-
-        TipoServicio nuevoModelo = modelService.newModel(model);
-        return ResponseEntity.ok(nuevoModelo);
+        return ResponseEntity.ok(modelService.guardar(model));
     }
 
 
     @PutMapping("/tipoServicioEliminar/{id}")
-    public ResponseEntity<TipoServicio> eliminar(@PathVariable Integer id){
-        TipoServicio model = modelService.buscarPorId(id);
-        if (model == null)
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-
-        model.setEstado(1);
-
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id){
+        return ResponseEntity.ok(modelService.eliminar(id));
     }
 
     @GetMapping("/tiposServicios/{id}")
     public ResponseEntity<TipoServicio> getPorId(@PathVariable Integer id){
-        TipoServicio cliente = modelService.buscarPorId(id);
-        if(cliente == null)
-            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.ok(modelService.buscarPorId(id));
     }
 
     @PutMapping("/tiposServicios/{id}")
     public ResponseEntity<TipoServicio> actualizar(@PathVariable Integer id,
                                                    @RequestBody TipoServicio modelRecibido){
-        TipoServicio model = modelService.buscarPorId(id);
-        if (model == null)
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-
-        modelService.guardar(modelRecibido);
-        return ResponseEntity.ok(modelRecibido);
+      return ResponseEntity.ok(modelService.actualizar(id, modelRecibido));
     }
 
 }
