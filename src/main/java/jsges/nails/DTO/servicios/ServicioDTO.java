@@ -18,9 +18,14 @@ public class ServicioDTO extends TipoServicioDTO{
     public Set<ItemServicioDTO> listaItems = new HashSet<>();
     public Double total;
     public String clienteRazonSocial;
+
+    private String tipoServicio ;
+    private Integer tipoServicioId ;
+
     public ServicioDTO() {
 
     }
+
 
     public ServicioDTO(Servicio elemento, List<ItemServicio>list) {
 
@@ -29,6 +34,9 @@ public class ServicioDTO extends TipoServicioDTO{
         this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
         this.fechaDocumento = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
+
+        this.tipoServicio=elemento.getTipo().getNombre();
+        this.tipoServicioId=elemento.getTipo().getId();
 
         list.forEach((model) -> {
            listaItems.add(new ItemServicioDTO(model));
@@ -42,6 +50,9 @@ public class ServicioDTO extends TipoServicioDTO{
         this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
         this.fechaDocumento = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
+
+        this.tipoServicio=elemento.getTipo().getNombre();
+        this.tipoServicioId=elemento.getTipo().getId();
 
 
     }
