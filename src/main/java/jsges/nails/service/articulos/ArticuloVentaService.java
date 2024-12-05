@@ -2,6 +2,7 @@ package jsges.nails.service.articulos;
 
 import jsges.nails.DTO.articulos.ArticuloVentaDTO;
 import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
 import jsges.nails.repository.articulos.ArticuloVentaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,25 +25,65 @@ public class ArticuloVentaService implements IArticuloVentaService{
     private ArticuloVentaRepository modelRepository;
     private static final Logger logger = LoggerFactory.getLogger(ArticuloVentaService.class);
 
+    @Autowired
+    private ILineaService lineaService;
+
 
     @Override
-    public List<ArticuloVenta> listar() {
-        return modelRepository.buscarNoEliminados();
+    public List<ArticuloVentaDTO> listar() {
+        logger.info("enta en  traer todas los articulos");
+        List<ArticuloVenta> list = modelRepository.buscarNoEliminados();
+        List<ArticuloVentaDTO> listadoDTO    =  new ArrayList<>();
+        list.forEach((model) -> {
+            listadoDTO.add(new ArticuloVentaDTO(model));
+        });
+        return listadoDTO;
     }
 
     @Override
-    public ArticuloVenta buscarPorId(Integer id) {
-        return modelRepository.findById(id).orElse(null);
+    public ArticuloVentaDTO buscarPorId(Integer id) {
+
+
+        ArticuloVenta articuloVenta = modelRepository.findById(id).orElse(null);
+        if(articuloVenta == null){
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+        }
+        ArticuloVentaDTO model = new ArticuloVentaDTO(articuloVenta);
+        //return ResponseEntity.ok(model);
+
+        return model;
     }
 
     @Override
-    public ArticuloVenta guardar(ArticuloVenta model) {
-        return modelRepository.save(model);
+    public ArticuloVenta guardar(ArticuloVentaDTO model) {
+
+        logger.info("entra" );
+
+        Integer idLinea = model.linea;
+
+        ArticuloVenta newModel =  new ArticuloVenta();
+        newModel.setDenominacion(model.denominacion);
+        newModel.setLinea(lineaService.buscarPorId(idLinea));
+
+        //ArticuloVenta modelSave= modelService.guardar(newModel);
+
+
+        return modelRepository.save(newModel);
     }
 
     @Override
-    public void eliminar(ArticuloVenta model) {
+    public Void eliminar(Integer id) {
+
+        ArticuloVenta model = modelRepository.findById(id).orElse(null);
+        //ArticuloVenta model = this.buscarPorId(id);
+        if (model == null){
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+        }
+
+        model.asEliminado();
+        //modelService.guardar(model);
         modelRepository.save(model);
+        return null;
     }
 
     @Override
@@ -54,24 +98,46 @@ public class ArticuloVentaService implements IArticuloVentaService{
     }
 
     @Override
-    public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, List<ArticuloVentaDTO> listado) {
+    public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, String consulta) {
+
+        List<ArticuloVenta> listadoConsulta = this.listar(consulta);
+        List<ArticuloVentaDTO> listadoDTO    =  new ArrayList<>();
+        listadoConsulta.forEach((model) -> {
+            listadoDTO.add(new ArticuloVentaDTO(model));
+        });
+
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<ArticuloVentaDTO> list;
-        if (listado.size() < startItem) {
+        if (listadoDTO.size() < startItem) {
             list = Collections.emptyList();
         } else {
-            int toIndex = Math.min(startItem + pageSize, listado.size());
-            list = listado.subList(startItem, toIndex);
+            int toIndex = Math.min(startItem + pageSize, listadoDTO.size());
+            list = listadoDTO.subList(startItem, toIndex);
         }
 
         Page<ArticuloVentaDTO> bookPage
-                = new PageImpl<ArticuloVentaDTO>(list, PageRequest.of(currentPage, pageSize), listado.size());
+                = new PageImpl<ArticuloVentaDTO>(list, PageRequest.of(currentPage, pageSize), listadoDTO.size());
+
+
 
         return bookPage;
     }
 
+public ArticuloVenta actualizar(Integer id, ArticuloVentaDTO modelRecibido){
 
+    logger.info("articulo " +modelRecibido);
+    ArticuloVenta model = modelRepository.findById(id).orElse(null);
+    logger.info("articulo " +model);
+    if (model == null){
+        throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+    }
+    logger.info("articulo " +model);
+    model.setDenominacion(modelRecibido.denominacion);
+    model.setLinea(lineaService.buscarPorId(modelRecibido.linea));
+    modelRepository.save(model);
+    return     modelRepository.save(model);
+}
 
 }

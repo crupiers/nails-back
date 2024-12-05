@@ -36,80 +36,37 @@ public class ArticuloVentaController {
     }
 
     @GetMapping({"/articulos"})
-    public List<ArticuloVentaDTO> getAll() {
-        logger.info("enta en  traer todas los articulos");
-        List<ArticuloVenta> list = modelService.listar();
-        List<ArticuloVentaDTO> listadoDTO    =  new ArrayList<>();
-        list.forEach((model) -> {
-            listadoDTO.add(new ArticuloVentaDTO(model));
-        });
-        return listadoDTO;
+    public ResponseEntity<List<ArticuloVentaDTO>> getAll() {
+        return ResponseEntity.ok(modelService.listar());
     }
 
     @GetMapping({"/articulosPageQuery"})
     public ResponseEntity<Page<ArticuloVentaDTO>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                         @RequestParam(defaultValue = "${max_page}") int size) {
-        List<ArticuloVenta> listado = modelService.listar(consulta);
-        List<ArticuloVentaDTO> listadoDTO    =  new ArrayList<>();
-        listado.forEach((model) -> {
-            listadoDTO.add(new ArticuloVentaDTO(model));
-        });
-        Page<ArticuloVentaDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),listadoDTO);
-        return ResponseEntity.ok().body(bookPage);
+        return ResponseEntity.ok().body(modelService.findPaginated(PageRequest.of(page, size),consulta));
     }
 
 
     @PostMapping("/articulos")
-    public ArticuloVenta agregar(@RequestBody ArticuloVentaDTO model){
-        logger.info("entra" );
-
-        Integer idLinea = model.linea;
-
-        ArticuloVenta newModel =  new ArticuloVenta();
-        newModel.setDenominacion(model.denominacion);
-        newModel.setLinea(lineaService.buscarPorId(idLinea));
-
-        ArticuloVenta modelSave= modelService.guardar(newModel);
-        return modelSave;
+    public ResponseEntity<ArticuloVenta> agregar(@RequestBody ArticuloVentaDTO model){
+        return ResponseEntity.ok(modelService.guardar(model));
     }
 
 
     @DeleteMapping("/articuloEliminar/{id}")
-    public ResponseEntity<ArticuloVenta> eliminar(@PathVariable Integer id){
-        ArticuloVenta model = modelService.buscarPorId(id);
-        if (model == null){
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-        }
-
-        model.asEliminado();
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id){
+        return ResponseEntity.ok(modelService.eliminar(id));
     }
 
     @GetMapping("/articulos/{id}")
     public ResponseEntity<ArticuloVentaDTO> getPorId(@PathVariable Integer id){
-        ArticuloVenta articuloVenta = modelService.buscarPorId(id);
-        if(articuloVenta == null){
-            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
-        }
-        ArticuloVentaDTO model = new ArticuloVentaDTO(articuloVenta);
-        return ResponseEntity.ok(model);
+        return ResponseEntity.ok(modelService.buscarPorId(id));
     }
 
     @PutMapping("/articulos/{id}")
     public ResponseEntity<ArticuloVenta> actualizar(@PathVariable Integer id,
                                                     @RequestBody ArticuloVentaDTO modelRecibido){
-        logger.info("articulo " +modelRecibido);
-        ArticuloVenta model = modelService.buscarPorId(id);
-        logger.info("articulo " +model);
-        if (model == null){
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-        }
-        logger.info("articulo " +model);
-        model.setDenominacion(modelRecibido.denominacion);
-        model.setLinea(lineaService.buscarPorId(modelRecibido.linea));
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
+      return ResponseEntity.ok(modelService.actualizar(id, modelRecibido));
     }
 
 }
