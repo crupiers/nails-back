@@ -12,13 +12,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface IServicioService {
-    public List<Servicio> listar();
+    public List<ServicioDTO> listar();
 
-    public Servicio buscarPorId(Integer id);
+    public ServicioDTO buscarPorId(Integer id);
 
-    public Servicio guardar(Servicio model);
+    public Servicio guardar(ServicioDTO model);
 
-    public Page<ServicioDTO> findPaginated(Pageable pageable,List<ServicioDTO> servicios);
+    public Page<ServicioDTO> findPaginated(Pageable pageable,String consulta);
 
     public Page<Servicio> getServicios(Pageable pageable);
 
