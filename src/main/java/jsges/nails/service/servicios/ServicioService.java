@@ -84,7 +84,7 @@ public class ServicioService implements IServicioService {
 
             TipoServicio tipoServicio = tipoServicioService.buscarPorId(elemento.getTipoServicioId());
             String observacion = elemento.getObservacion();
-            ItemServicio item = new ItemServicio(newModel, tipoServicio, precio,observacion);
+            ItemServicio item = new ItemServicio(newModel, precio,observacion);
 
             itemServicioService.guardar(item);
 

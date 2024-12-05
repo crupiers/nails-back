@@ -21,6 +21,9 @@ public class Servicio extends TipoObjeto {
         private Timestamp fechaRealizacion;
         private double total;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private TipoServicio tipo;
+
 
     public Servicio() {
 

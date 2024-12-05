@@ -13,8 +13,7 @@ import java.util.Objects;
 @ToString
 public class ItemServicio extends TipoObjeto {
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private TipoServicio tipoServicio;
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
@@ -27,9 +26,9 @@ public class ItemServicio extends TipoObjeto {
 
     }
 
-    public ItemServicio(Servicio servicio ,TipoServicio tipo, Double precio,String observacion) {
+    public ItemServicio(Servicio servicio, Double precio,String observacion) {
         this.servicio = servicio;
-        this.tipoServicio = tipo;
+        //this.tipoServicio = tipo;
         this.precio = precio;
         this.setObservacion(observacion);
     }
