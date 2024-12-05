@@ -1,4 +1,5 @@
 package jsges.nails.DTO.Organizacion;
+import jakarta.validation.constraints.Email;
 import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.organizacion.Cliente;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class ClienteDTO extends TipoServicioDTO {
     private String letra;
     private String contacto;
     private String celular;
+    @Email
     private String mail;
     private Date fechaInicio;
     private Date fechaNacimiento;

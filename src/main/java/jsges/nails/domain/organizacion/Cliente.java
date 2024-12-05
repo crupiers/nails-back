@@ -1,6 +1,7 @@
 package jsges.nails.domain.organizacion;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jsges.nails.domain.TipoObjeto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Cliente extends TipoObjeto {
         @Column(columnDefinition = "TEXT")
         String celular;
         @Column(columnDefinition = "TEXT")
+        @Email
         String mail;
 
         Date fechaInicio;
