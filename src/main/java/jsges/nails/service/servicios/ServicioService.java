@@ -76,13 +76,14 @@ public class ServicioService implements IServicioService {
         newModel.setFechaRegistro(model.fechaDocumento);
         newModel.setFechaRealizacion(model.fechaDocumento);
         newModel.setEstado(0);
+        newModel.setTipo(tipoServicioService.buscarPorId(model.getTipoServicioId()));
 
         Servicio servicioGuardado= modelRepository.save(newModel);
         for (ItemServicioDTO elemento : model.listaItems) {
             double precio = elemento.getPrecio();
             logger.info("entra for");
 
-            TipoServicio tipoServicio = tipoServicioService.buscarPorId(elemento.getTipoServicioId());
+            //TipoServicio tipoServicio = tipoServicioService.buscarPorId(elemento.getTipoServicioId());
             String observacion = elemento.getObservacion();
             ItemServicio item = new ItemServicio(newModel, precio,observacion);
 

@@ -4,12 +4,14 @@ import jsges.nails.DTO.Organizacion.ClienteDTO;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
+import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Data
 public class ServicioDTO extends TipoServicioDTO{
 
     //public Integer id;
@@ -19,8 +21,8 @@ public class ServicioDTO extends TipoServicioDTO{
     public Double total;
     public String clienteRazonSocial;
 
-    private String tipoServicio ;
-    private Integer tipoServicioId ;
+    public String tipoServicio ;
+    public Integer tipoServicioId ;
 
     public ServicioDTO() {
 
