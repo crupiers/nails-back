@@ -13,12 +13,6 @@ import java.sql.Timestamp;
 @ToString
 public class Servicio {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
-
-        private int estado;
-
         @ManyToOne(cascade = CascadeType.ALL)
         private Cliente cliente;
 

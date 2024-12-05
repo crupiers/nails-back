@@ -31,11 +31,11 @@ public class Linea extends TipoObjeto {
 
     public Linea(String nombre) {
 
-        this.setDenominacion(nombre);
+        this.setNombre(nombre);
     }
 
     public Linea(LineaDTO model) {
-        this.setDenominacion(model.denominacion);
+        this.setNombre(model.denominacion);
 
     }
 }
