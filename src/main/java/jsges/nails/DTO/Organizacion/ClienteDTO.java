@@ -1,12 +1,16 @@
 package jsges.nails.DTO.Organizacion;
+import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.organizacion.Cliente;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
-@Data
-public class ClienteDTO {
 
-    private Integer id;
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class ClienteDTO extends TipoServicioDTO {
+
+    //private Integer id;
     private String razonSocial;
     private String letra;
     private String contacto;

@@ -10,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -45,7 +43,7 @@ public class TipoServicioService implements ITipoServicioService {
     @Override
     public TipoServicio guardar(TipoServicioDTO model) {
 
-        List<TipoServicio> list = this.buscar(model.denominacion);
+        List<TipoServicio> list = this.buscar(model.nombre);
         if (!list.isEmpty()){
             throw new NullPointerException();
             //return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -61,7 +59,7 @@ public class TipoServicioService implements ITipoServicioService {
     @Override
     public TipoServicio newModel(TipoServicioDTO modelDTO) {
         TipoServicio model =  new TipoServicio();
-        model.setNombre(modelDTO.denominacion);
+        model.setNombre(modelDTO.nombre);
         return modelRepository.save(model);
     }
 

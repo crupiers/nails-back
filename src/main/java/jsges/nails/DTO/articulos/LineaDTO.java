@@ -11,6 +11,6 @@ public class LineaDTO extends TipoObjetoDTO {
 
     public LineaDTO(Linea linea) {
         this.id= linea.getId();
-        this.denominacion= linea.getDenominacion();
+        this.nombre = linea.getNombre();
     }
 }

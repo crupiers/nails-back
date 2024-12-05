@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ServicioDTO{
+public class ServicioDTO extends TipoServicioDTO{
 
-    public Integer id;
+    //public Integer id;
     public Integer cliente;
     public Timestamp fechaDocumento;
     public Set<ItemServicioDTO> listaItems = new HashSet<>();

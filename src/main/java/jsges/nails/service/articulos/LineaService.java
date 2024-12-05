@@ -11,8 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class LineaService implements ILineaService {
     @Override
     public Linea newModel(LineaDTO modelDTO) {
 
-        List<Linea> list = this.buscar(modelDTO.denominacion);
+        List<Linea> list = this.buscar(modelDTO.nombre);
         if (!list.isEmpty()){
             throw new NullPointerException();
             //return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -145,7 +143,7 @@ public class LineaService implements ILineaService {
         //if (model == null){
         //    throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         //}
-        model.setNombre(modelRecibido.denominacion);
+        model.setNombre(modelRecibido.nombre);
         return new LineaDTO(this.guardar(model));
 
     }
