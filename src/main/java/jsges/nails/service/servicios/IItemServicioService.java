@@ -14,7 +14,7 @@ public interface IItemServicioService {
 
     public ItemServicio guardar(ItemServicio model);
 
-    public Page<ItemServicio> findPaginated(Pageable pageable,List<ItemServicio> servicios);
+   // public Page<ItemServicio> findPaginated(Pageable pageable,List<ItemServicio> servicios);
 
     public Page<ItemServicio> getItemServicios(Pageable pageable);
 

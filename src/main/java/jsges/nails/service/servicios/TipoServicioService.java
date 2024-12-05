@@ -93,6 +93,7 @@ public class TipoServicioService implements ITipoServicioService {
     }
 
 
+    /**
     @Override
     public Page<TipoServicio> findPaginated(Pageable pageable, String consulta) {
 
@@ -114,6 +115,7 @@ public class TipoServicioService implements ITipoServicioService {
 
         return bookPage;
     }
+    */
 
     public TipoServicio actualizar(Integer id, TipoServicio modelRecibido) {
         TipoServicio model = this.buscarPorId(id);

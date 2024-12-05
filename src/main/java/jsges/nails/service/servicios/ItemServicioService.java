@@ -41,10 +41,12 @@ public class ItemServicioService implements IItemServicioService {
         return modelRepository.save(model);
     }
 
+    /**
     @Override
     public Page<ItemServicio> findPaginated(Pageable pageable, List<ItemServicio> servicios) {
         return null;
     }
+     */
 
     @Override
     public Page<ItemServicio> getItemServicios(Pageable pageable) {

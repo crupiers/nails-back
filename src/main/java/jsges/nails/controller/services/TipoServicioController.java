@@ -33,11 +33,13 @@ public class TipoServicioController {
         return ResponseEntity.ok(modelService.listar());
     }
 
+    /**
     @GetMapping({"/tiposServiciosPageQuery"})
     public ResponseEntity<Page<TipoServicio>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "${max_page}") int size) {
         return ResponseEntity.ok().body(modelService.findPaginated(PageRequest.of(page, size),consulta));
     }
+     */
 
 
     @PostMapping("/tiposServicios")

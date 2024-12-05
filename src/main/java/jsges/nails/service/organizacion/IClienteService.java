@@ -20,7 +20,7 @@ public interface IClienteService {
 
     public Page<Cliente> getClientes(Pageable pageable);
 
-    public Page<ClienteDTO> findPaginated(Pageable pageable, String consulta);
+   // public Page<ClienteDTO> findPaginated(Pageable pageable, String consulta);
 
     public Cliente actualizar(Integer id, Cliente modelRecibido);
 

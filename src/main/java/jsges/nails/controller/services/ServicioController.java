@@ -53,11 +53,13 @@ public class ServicioController {
         return ResponseEntity.ok(modelService.buscarPorId(id));
     }
 
+    /**
     @GetMapping({"/serviciosPageQuery"})
     public ResponseEntity<Page<ServicioDTO>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                            @RequestParam(defaultValue = "${max_page}") int size) {
         return ResponseEntity.ok().body(modelService.findPaginated(PageRequest.of(page, size),consulta));
     }
+     */
 
     @PostMapping("/servicios")
     public ResponseEntity<Servicio> agregar(@RequestBody ServicioDTO model){

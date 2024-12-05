@@ -21,7 +21,7 @@ public interface IArticuloVentaService {
 
     public Page<ArticuloVenta> getArticulos(Pageable pageable);
 
-    public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, String consulta);
+   // public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, String consulta);
 
     public ArticuloVenta actualizar(Integer id, ArticuloVentaDTO modelRecibido);
 

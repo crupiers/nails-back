@@ -34,11 +34,13 @@ public class LineaController {
     }
 
 
+    /**
     @GetMapping({"/lineasPageQuery"})
     public ResponseEntity<Page<LineaDTO>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "${max_page}") int size) {
         return ResponseEntity.ok().body(modelService.findPaginated(PageRequest.of(page, size),consulta));
     }
+     */
 
 
     @PostMapping("/linea")
