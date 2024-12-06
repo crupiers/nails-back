@@ -29,7 +29,7 @@ public class TipoObjeto implements Serializable {
         @Size(min = LONGITUD_MIN_NOMBRE, max = LONGITUD_MAX_NOMBRE)
         private String nombre;
         @Column(nullable = false)
-        private int estado;
+        private int estado = ESTADO_DISPONIBLE;
         @Column(columnDefinition = "TEXT")
         @Size(max = LONGITUD_MAX_OBSERVACION)
         private String observacion;
