@@ -49,18 +49,7 @@ public class ClienteService implements IClienteService {
     public ClienteDTO guardar(ClienteDTO cliente) {
 
         //PASAMOS DE DTO A ENTIDAD
-        Cliente model = new Cliente();
-
-        model.setId(cliente.getId());
-        model.setNombre(cliente.getNombre());
-        model.setObservacion(cliente.getObservacion());
-        model.setRazonSocial(cliente.getRazonSocial());
-        model.setLetra(cliente.getLetra());
-        model.setContacto(cliente.getContacto());
-        model.setCelular(cliente.getCelular());
-        model.setMail(cliente.getMail());
-        model.setFechaInicio(cliente.getFechaInicio());
-        model.setFechaNacimiento(cliente.getFechaNacimiento());
+        Cliente model = ClienteMapper.toEntity(cliente);
 
         return ClienteMapper.toDTO(clienteRepository.save(model));
     }
