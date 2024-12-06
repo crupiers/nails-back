@@ -3,6 +3,7 @@ package jsges.nails.unitarios;
 import jsges.nails.DTO.Organizacion.ClienteDTO;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.mappers.ClienteMapper;
 import jsges.nails.repository.organizacion.ClienteRepository;
 import jsges.nails.service.organizacion.ClienteService;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,7 +92,7 @@ public class ClienteServiceTest {
         clienteDTO.setId(1); //mockito no agrega id automaticamente, devolveria un null
         Cliente cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado = clienteService.guardar(clienteDTO);
+        ClienteDTO clienteGuardado = clienteService.guardar(clienteDTO);
 
         //------------------------------------------------------------------------
 
@@ -136,7 +137,7 @@ public class ClienteServiceTest {
         clienteDTO.setId(1);
         Cliente cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado1 = clienteService.guardar(clienteDTO);
+        ClienteDTO clienteGuardado1 = clienteService.guardar(clienteDTO);
 
         //------------------------------------------------------------------------
 
@@ -167,15 +168,15 @@ public class ClienteServiceTest {
         clienteDTO.setId(2);
         cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado2 = clienteService.guardar(clienteDTO);
+        ClienteDTO clienteGuardado2 = clienteService.guardar(clienteDTO);
 
         //------------------------------------------------------------------------
 
-        when(clienteRepository.findById(1)).thenReturn(Optional.ofNullable(clienteGuardado1));
-        Cliente clienteExiste1 = clienteService.buscarPorId(1);
+        when(clienteRepository.findById(1)).thenReturn(Optional.ofNullable(ClienteMapper.toEntity(clienteGuardado1)));
+        ClienteDTO clienteExiste1 = clienteService.buscarPorId(1);
 
-        when(clienteRepository.findById(2)).thenReturn(Optional.ofNullable(clienteGuardado2));
-        Cliente clienteExiste2 = clienteService.buscarPorId(2);
+        when(clienteRepository.findById(2)).thenReturn(Optional.ofNullable(ClienteMapper.toEntity(clienteGuardado2)));
+        ClienteDTO clienteExiste2 = clienteService.buscarPorId(2);
 
         //------------------------------------------------------------------------
 
@@ -225,7 +226,7 @@ public class ClienteServiceTest {
         clienteDTO.setId(3);
         Cliente cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado = clienteService.guardar(clienteDTO);
+        ClienteDTO clienteGuardado = clienteService.guardar(clienteDTO);
 
         String emailAddress = clienteGuardado.getMail();
         String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
