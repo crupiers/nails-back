@@ -1,5 +1,6 @@
 package jsges.nails.controller.organizacion;
 
+import jakarta.validation.Valid;
 import jsges.nails.DTO.Organizacion.ClienteDTO;
 import jsges.nails.DTO.articulos.LineaDTO;
 import jsges.nails.domain.articulos.Linea;
@@ -46,7 +47,7 @@ public class ClienteControlador {
 
 
     @PostMapping("/clientes")
-    public ResponseEntity<ClienteDTO> agregar(@RequestBody ClienteDTO cliente){
+    public ResponseEntity<ClienteDTO> agregar(@Valid @RequestBody  ClienteDTO cliente){
         return ResponseEntity.ok(clienteServicio.guardar(cliente));
     }
 
@@ -63,7 +64,7 @@ public class ClienteControlador {
 
     @PutMapping("/clientes/{id}")
     public ResponseEntity<ClienteDTO> actualizar(@PathVariable Integer id,
-                                              @RequestBody Cliente modelRecibido){
+                                                 @Valid @RequestBody  Cliente modelRecibido){
         return ResponseEntity.ok(clienteServicio.actualizar(id, modelRecibido));
     }
 

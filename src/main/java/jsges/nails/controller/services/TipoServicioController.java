@@ -1,6 +1,7 @@
 package jsges.nails.controller.services;
 
 
+import jakarta.validation.Valid;
 import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.servicios.TipoServicio;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
@@ -43,7 +44,7 @@ public class TipoServicioController {
 
 
     @PostMapping("/tiposServicios")
-    public  ResponseEntity<TipoServicio>  agregar(@RequestBody TipoServicioDTO model){
+    public  ResponseEntity<TipoServicio>  agregar(@Valid @RequestBody TipoServicioDTO model){
         return ResponseEntity.ok(modelService.guardar(model));
     }
 
@@ -60,7 +61,7 @@ public class TipoServicioController {
 
     @PutMapping("/tiposServicios/{id}")
     public ResponseEntity<TipoServicio> actualizar(@PathVariable Integer id,
-                                                   @RequestBody TipoServicio modelRecibido){
+                                                   @Valid @RequestBody TipoServicio modelRecibido){
       return ResponseEntity.ok(modelService.actualizar(id, modelRecibido));
     }
 

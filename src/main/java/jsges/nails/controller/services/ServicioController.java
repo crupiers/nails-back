@@ -1,4 +1,5 @@
 package jsges.nails.controller.services;
+import jakarta.validation.Valid;
 import jsges.nails.DTO.articulos.ArticuloVentaDTO;
 import jsges.nails.DTO.servicios.ItemServicioDTO;
 import jsges.nails.DTO.servicios.ServicioDTO;
@@ -62,7 +63,7 @@ public class ServicioController {
      */
 
     @PostMapping("/servicios")
-    public ResponseEntity<ServicioDTO> agregar(@RequestBody ServicioDTO model){
+    public ResponseEntity<ServicioDTO> agregar(@Valid @RequestBody ServicioDTO model){
         return ResponseEntity.ok(modelService.guardar(model));
     }
 }

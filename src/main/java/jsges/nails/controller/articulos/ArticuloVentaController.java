@@ -1,5 +1,6 @@
 package jsges.nails.controller.articulos;
 
+import jakarta.validation.Valid;
 import jsges.nails.DTO.articulos.ArticuloVentaDTO;
 import jsges.nails.DTO.articulos.LineaDTO;
 import jsges.nails.domain.articulos.ArticuloVenta;
@@ -50,7 +51,7 @@ public class ArticuloVentaController {
 
 
     @PostMapping("/articulos")
-    public ResponseEntity<ArticuloVentaDTO> agregar(@RequestBody ArticuloVentaDTO model){
+    public ResponseEntity<ArticuloVentaDTO> agregar(@Valid @RequestBody ArticuloVentaDTO model){
         return ResponseEntity.ok(modelService.guardar(model));
     }
 
@@ -67,7 +68,7 @@ public class ArticuloVentaController {
 
     @PutMapping("/articulos/{id}")
     public ResponseEntity<ArticuloVentaDTO> actualizar(@PathVariable Integer id,
-                                                    @RequestBody ArticuloVentaDTO modelRecibido){
+                                                       @Valid @RequestBody ArticuloVentaDTO modelRecibido){
       return ResponseEntity.ok(modelService.actualizar(id, modelRecibido));
     }
 
