@@ -1,6 +1,8 @@
 package jsges.nails.unitarios;
 
+import jsges.nails.DTO.Organizacion.ClienteDTO;
 import jsges.nails.domain.organizacion.Cliente;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
 import jsges.nails.repository.organizacion.ClienteRepository;
 import jsges.nails.service.organizacion.ClienteService;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +26,7 @@ public class ClienteServiceTest {
     @Mock
     private ClienteRepository clienteRepository;
 
-    private Cliente cliente;
+    private ClienteDTO clienteDTO;
 
     private String nombre;
     private String observacion;
@@ -37,6 +39,23 @@ public class ClienteServiceTest {
     private Date fechaInicio;
     private Date fechaNacimiento;
 
+    private static Cliente toEntity(ClienteDTO dto) {
+        Cliente entity = new Cliente();
+
+        entity.setId(dto.getId());
+        entity.setNombre(dto.getNombre());
+        entity.setObservacion(dto.getObservacion());
+        entity.setRazonSocial(dto.getRazonSocial());
+        entity.setLetra(dto.getLetra());
+        entity.setContacto(dto.getContacto());
+        entity.setCelular(dto.getCelular());
+        entity.setMail(dto.getMail());
+        entity.setFechaInicio(dto.getFechaInicio());
+        entity.setFechaNacimiento(dto.getFechaNacimiento());
+
+        return entity;
+    }
+
     @BeforeEach
     void antesDeCadaTest() {
         MockitoAnnotations.openMocks(this);
@@ -45,10 +64,10 @@ public class ClienteServiceTest {
     @Test
     void crearClienteNuevo() {
 
-        cliente = new Cliente();
+        clienteDTO = new ClienteDTO();
 
         nombre = "Juan Pérez";
-        observacion = "Primer cliente";
+        observacion = "Primer clienteDTO";
 
         razonSocial = "Juancito SA";
         letra = "RI";
@@ -58,41 +77,42 @@ public class ClienteServiceTest {
         fechaInicio = new Date(2024, 9, 12);
         fechaNacimiento = new Date(2002, 8, 10);
 
-        cliente.setNombre(nombre);
-        cliente.setObservacion(observacion);
+        clienteDTO.setNombre(nombre);
+        clienteDTO.setObservacion(observacion);
 
-        cliente.setRazonSocial(razonSocial);
-        cliente.setLetra(letra);
-        cliente.setContacto(contacto);
-        cliente.setCelular(celular);
-        cliente.setMail(mail);
-        cliente.setFechaInicio(fechaInicio);
-        cliente.setFechaNacimiento(fechaNacimiento);
+        clienteDTO.setRazonSocial(razonSocial);
+        clienteDTO.setLetra(letra);
+        clienteDTO.setContacto(contacto);
+        clienteDTO.setCelular(celular);
+        clienteDTO.setMail(mail);
+        clienteDTO.setFechaInicio(fechaInicio);
+        clienteDTO.setFechaNacimiento(fechaNacimiento);
 
-        cliente.setId(1); //mockito no agrega id automaticamente, devolveria un null
+        clienteDTO.setId(1); //mockito no agrega id automaticamente, devolveria un null
+        Cliente cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado = clienteService.guardar(cliente);
+        Cliente clienteGuardado = clienteService.guardar(clienteDTO);
 
         //------------------------------------------------------------------------
 
         assertNotNull(clienteGuardado);
         assertNotEquals(clienteGuardado.getId(),null);
 
-        assertEquals(cliente.getId(), clienteGuardado.getId());
-        assertEquals(cliente.getNombre(), clienteGuardado.getNombre());
-        assertEquals(cliente.getRazonSocial(), clienteGuardado.getRazonSocial());
-        assertEquals(cliente.getMail(), clienteGuardado.getMail());
-        assertEquals(cliente.getFechaInicio(), clienteGuardado.getFechaInicio());
+        assertEquals(clienteDTO.getId(), clienteGuardado.getId());
+        assertEquals(clienteDTO.getNombre(), clienteGuardado.getNombre());
+        assertEquals(clienteDTO.getRazonSocial(), clienteGuardado.getRazonSocial());
+        assertEquals(clienteDTO.getMail(), clienteGuardado.getMail());
+        assertEquals(clienteDTO.getFechaInicio(), clienteGuardado.getFechaInicio());
 
     }
 
     @Test
     void idClientesDiferentes() {
 
-        cliente = new Cliente();
+        clienteDTO = new ClienteDTO();
 
         nombre = "Juan Pérez";
-        observacion = "Primer cliente";
+        observacion = "Primer clienteDTO";
 
         razonSocial = "Juancito SA";
         letra = "RI";
@@ -102,27 +122,28 @@ public class ClienteServiceTest {
         fechaInicio = new Date(2024, 9, 12);
         fechaNacimiento = new Date(2002, 8, 10);
 
-        cliente.setNombre(nombre);
-        cliente.setObservacion(observacion);
+        clienteDTO.setNombre(nombre);
+        clienteDTO.setObservacion(observacion);
 
-        cliente.setRazonSocial(razonSocial);
-        cliente.setLetra(letra);
-        cliente.setContacto(contacto);
-        cliente.setCelular(celular);
-        cliente.setMail(mail);
-        cliente.setFechaInicio(fechaInicio);
-        cliente.setFechaNacimiento(fechaNacimiento);
+        clienteDTO.setRazonSocial(razonSocial);
+        clienteDTO.setLetra(letra);
+        clienteDTO.setContacto(contacto);
+        clienteDTO.setCelular(celular);
+        clienteDTO.setMail(mail);
+        clienteDTO.setFechaInicio(fechaInicio);
+        clienteDTO.setFechaNacimiento(fechaNacimiento);
 
-        cliente.setId(1);
+        clienteDTO.setId(1);
+        Cliente cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado1 = clienteService.guardar(cliente);
+        Cliente clienteGuardado1 = clienteService.guardar(clienteDTO);
 
         //------------------------------------------------------------------------
 
-        cliente = new Cliente();
+        clienteDTO = new ClienteDTO();
 
         nombre = "Tomás García";
-        observacion = "Segundo cliente";
+        observacion = "Segundo clienteDTO";
 
         razonSocial = "García y Compañía";
         letra = "RI";
@@ -132,20 +153,21 @@ public class ClienteServiceTest {
         fechaInicio = new Date(2024, 10, 21);
         fechaNacimiento = new Date(2000, 3, 15);
 
-        cliente.setNombre(nombre);
-        cliente.setObservacion(observacion);
+        clienteDTO.setNombre(nombre);
+        clienteDTO.setObservacion(observacion);
 
-        cliente.setRazonSocial(razonSocial);
-        cliente.setLetra(letra);
-        cliente.setContacto(contacto);
-        cliente.setCelular(celular);
-        cliente.setMail(mail);
-        cliente.setFechaInicio(fechaInicio);
-        cliente.setFechaNacimiento(fechaNacimiento);
+        clienteDTO.setRazonSocial(razonSocial);
+        clienteDTO.setLetra(letra);
+        clienteDTO.setContacto(contacto);
+        clienteDTO.setCelular(celular);
+        clienteDTO.setMail(mail);
+        clienteDTO.setFechaInicio(fechaInicio);
+        clienteDTO.setFechaNacimiento(fechaNacimiento);
 
-        cliente.setId(2);
+        clienteDTO.setId(2);
+        cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado2 = clienteService.guardar(cliente);
+        Cliente clienteGuardado2 = clienteService.guardar(clienteDTO);
 
         //------------------------------------------------------------------------
 
@@ -164,15 +186,18 @@ public class ClienteServiceTest {
         assertEquals(clienteExiste1.getId(), 1);
         assertEquals(clienteExiste2.getId(), 2);
 
+        assertThrows(RecursoNoEncontradoExcepcion.class,() -> { clienteService.buscarPorId(2123); });
+        assertThrows(RecursoNoEncontradoExcepcion.class,() -> { clienteService.buscarPorId(300); });
+
     }
 
     @Test
     void emailNoValido() {
 
-        cliente = new Cliente();
+        clienteDTO = new ClienteDTO();
 
         nombre = "Paulina Giménez";
-        observacion = "Una cliente";
+        observacion = "Una clienteDTO";
 
         razonSocial = "Paulita SA";
         letra = "M";
@@ -182,24 +207,25 @@ public class ClienteServiceTest {
         fechaInicio = new Date(2023, 2, 8);
         fechaNacimiento = new Date(2007, 9, 20);
 
-        cliente.setNombre(nombre);
-        cliente.setObservacion(observacion);
+        clienteDTO.setNombre(nombre);
+        clienteDTO.setObservacion(observacion);
 
-        cliente.setRazonSocial(razonSocial);
-        cliente.setLetra(letra);
-        cliente.setContacto(contacto);
-        cliente.setCelular(celular);
-        //cliente.setMail(mail);
-        cliente.setFechaInicio(fechaInicio);
-        cliente.setFechaNacimiento(fechaNacimiento);
+        clienteDTO.setRazonSocial(razonSocial);
+        clienteDTO.setLetra(letra);
+        clienteDTO.setContacto(contacto);
+        clienteDTO.setCelular(celular);
+        //clienteDTO.setMail(mail);
+        clienteDTO.setFechaInicio(fechaInicio);
+        clienteDTO.setFechaNacimiento(fechaNacimiento);
 
         //------------------------------------------------------------------------
 
-        cliente.setMail("no_valid@ooo");
+        clienteDTO.setMail("no_valid@ooo");
 
-        cliente.setId(3);
+        clienteDTO.setId(3);
+        Cliente cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        Cliente clienteGuardado = clienteService.guardar(cliente);
+        Cliente clienteGuardado = clienteService.guardar(clienteDTO);
 
         String emailAddress = clienteGuardado.getMail();
         String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
@@ -208,11 +234,12 @@ public class ClienteServiceTest {
 
         //------------------------------------------------------------------------
 
-        cliente.setMail("mail__@valido.com.ar");
+        clienteDTO.setMail("mail__@valido.com.ar");
 
-        cliente.setId(3);
+        clienteDTO.setId(3);
+        cliente = toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
-        clienteGuardado = clienteService.guardar(cliente);
+        clienteGuardado = clienteService.guardar(clienteDTO);
 
         emailAddress = clienteGuardado.getMail();
         //regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";

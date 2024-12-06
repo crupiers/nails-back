@@ -45,8 +45,23 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public Cliente guardar(Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public Cliente guardar(ClienteDTO cliente) {
+
+        //PASAMOS DE DTO A ENTIDAD
+        Cliente model = new Cliente();
+
+        model.setId(cliente.getId());
+        model.setNombre(cliente.getNombre());
+        model.setObservacion(cliente.getObservacion());
+        model.setRazonSocial(cliente.getRazonSocial());
+        model.setLetra(cliente.getLetra());
+        model.setContacto(cliente.getContacto());
+        model.setCelular(cliente.getCelular());
+        model.setMail(cliente.getMail());
+        model.setFechaInicio(cliente.getFechaInicio());
+        model.setFechaNacimiento(cliente.getFechaNacimiento());
+
+        return clienteRepository.save(model);
     }
 
     @Override
@@ -58,7 +73,7 @@ public class ClienteService implements IClienteService {
 
         model.setEstado(1);
 
-        this.guardar(model);
+        this.clienteRepository.save(model);
 
          // clienteRepository.save(model);
           return null;
@@ -105,7 +120,7 @@ public class ClienteService implements IClienteService {
         if (model == null)
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
 
-        return this.guardar(modelRecibido);
+        return this.clienteRepository.save(modelRecibido);
     }
 
 }

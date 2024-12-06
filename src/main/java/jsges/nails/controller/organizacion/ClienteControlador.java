@@ -46,7 +46,7 @@ public class ClienteControlador {
 
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> agregar(@RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> agregar(@RequestBody ClienteDTO cliente){
         return ResponseEntity.ok(clienteServicio.guardar(cliente));
     }
 

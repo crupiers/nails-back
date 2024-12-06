@@ -12,7 +12,7 @@ public interface IClienteService {
 
     public Cliente buscarPorId(Integer id);
 
-    public Cliente guardar(Cliente cliente);
+    public Cliente guardar(ClienteDTO cliente);
 
     public Void eliminar(Integer id);
 
