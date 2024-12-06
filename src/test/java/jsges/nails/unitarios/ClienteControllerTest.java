@@ -41,18 +41,18 @@ public class ClienteControllerTest {
 
         ClienteDTO clienteNuevo = new ClienteDTO();
         clienteNuevo.setId(1);
-        clienteNuevo.setNombre("CLIENTE Nº 1");
+        clienteNuevo.setNombre("CLIENTE 1");
         clienteNuevo.setObservacion("cliente de prueba");
 
         when(clienteService.guardar(clienteNuevo)).thenReturn(clienteNuevo);
 
         mockMvc.perform(post("http://localhost:8080/nails/clientes")
                         .contentType("application/json")
-                        .content("{\"id\":1,\"nombre\":\"CLIENTE Nº 1\",\"observacion\":\"cliente de prueba\"}")
+                        .content("{\"id\":1,\"nombre\":\"CLIENTE 1\",\"observacion\":\"cliente de prueba\"}")
 
         ).andExpect(status().isOk()
         ).andExpect(jsonPath("$.id",is(1))
-        ).andExpect(jsonPath("$.nombre",is("CLIENTE Nº 1"))
+        ).andExpect(jsonPath("$.nombre",is("CLIENTE 1"))
         ).andExpect(jsonPath("$.observacion",is("cliente de prueba"))
         ).andExpect(jsonPath("$.razonSocial",is(nullValue()))
         ).andExpect(jsonPath("$.letra",is(nullValue()))
@@ -63,5 +63,54 @@ public class ClienteControllerTest {
         ).andExpect(jsonPath("$.fechaNacimiento",is(nullValue())));
 
     }
+
+    @Test
+    void clienteConMailValido() throws Exception {
+
+        ClienteDTO clienteNuevo = new ClienteDTO();
+        clienteNuevo.setId(2);
+        clienteNuevo.setNombre("CLIENTE 2");
+        clienteNuevo.setObservacion("cliente de prueba con mail bien");
+        clienteNuevo.setMail("mail@bien.com");
+
+        when(clienteService.guardar(clienteNuevo)).thenReturn(clienteNuevo);
+
+        mockMvc.perform(post("http://localhost:8080/nails/clientes")
+                .contentType("application/json")
+                .content("{\"id\":2,\"nombre\":\"CLIENTE 2\",\"observacion\":\"cliente de prueba con mail bien\",\"mail\":\"mail@bien.com\"}")
+
+        ).andExpect(status().isOk()
+        ).andExpect(jsonPath("$.id",is(2))
+        ).andExpect(jsonPath("$.nombre",is("CLIENTE 2"))
+        ).andExpect(jsonPath("$.observacion",is("cliente de prueba con mail bien"))
+        ).andExpect(jsonPath("$.razonSocial",is(nullValue()))
+        ).andExpect(jsonPath("$.letra",is(nullValue()))
+        ).andExpect(jsonPath("$.contacto",is(nullValue()))
+        ).andExpect(jsonPath("$.celular",is(nullValue()))
+        ).andExpect(jsonPath("$.mail",is("mail@bien.com"))
+        ).andExpect(jsonPath("$.fechaInicio",is(nullValue()))
+        ).andExpect(jsonPath("$.fechaNacimiento",is(nullValue())));
+
+    }
+
+    @Test
+    void clienteConMailInvalido() throws Exception {
+
+        ClienteDTO clienteNuevo = new ClienteDTO();
+        clienteNuevo.setId(3);
+        clienteNuevo.setNombre("CLIENTE 3");
+        clienteNuevo.setObservacion("cliente de prueba con mail mal");
+        clienteNuevo.setMail("mail@mal.");
+
+        when(clienteService.guardar(clienteNuevo)).thenReturn(clienteNuevo);
+
+        mockMvc.perform(post("http://localhost:8080/nails/clientes")
+                .contentType("application/json")
+                .content("{\"id\":3,\"nombre\":\"CLIENTE 3\",\"observacion\":\"cliente de prueba con mail mal\",\"mail\":\"mail@mal.\"}")
+
+        ).andExpect(status().isBadRequest());
+
+    }
+
 
 }
