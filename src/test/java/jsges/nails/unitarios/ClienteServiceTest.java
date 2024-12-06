@@ -40,23 +40,6 @@ public class ClienteServiceTest {
     private Date fechaInicio;
     private Date fechaNacimiento;
 
-    private static Cliente toEntity(ClienteDTO dto) {
-        Cliente entity = new Cliente();
-
-        entity.setId(dto.getId());
-        entity.setNombre(dto.getNombre());
-        entity.setObservacion(dto.getObservacion());
-        entity.setRazonSocial(dto.getRazonSocial());
-        entity.setLetra(dto.getLetra());
-        entity.setContacto(dto.getContacto());
-        entity.setCelular(dto.getCelular());
-        entity.setMail(dto.getMail());
-        entity.setFechaInicio(dto.getFechaInicio());
-        entity.setFechaNacimiento(dto.getFechaNacimiento());
-
-        return entity;
-    }
-
     @BeforeEach
     void antesDeCadaTest() {
         MockitoAnnotations.openMocks(this);
@@ -90,7 +73,7 @@ public class ClienteServiceTest {
         clienteDTO.setFechaNacimiento(fechaNacimiento);
 
         clienteDTO.setId(1); //mockito no agrega id automaticamente, devolveria un null
-        Cliente cliente = toEntity(clienteDTO);
+        Cliente cliente = ClienteMapper.toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
         ClienteDTO clienteGuardado = clienteService.guardar(clienteDTO);
 
@@ -135,7 +118,7 @@ public class ClienteServiceTest {
         clienteDTO.setFechaNacimiento(fechaNacimiento);
 
         clienteDTO.setId(1);
-        Cliente cliente = toEntity(clienteDTO);
+        Cliente cliente = ClienteMapper.toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
         ClienteDTO clienteGuardado1 = clienteService.guardar(clienteDTO);
 
@@ -166,7 +149,7 @@ public class ClienteServiceTest {
         clienteDTO.setFechaNacimiento(fechaNacimiento);
 
         clienteDTO.setId(2);
-        cliente = toEntity(clienteDTO);
+        cliente = ClienteMapper.toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
         ClienteDTO clienteGuardado2 = clienteService.guardar(clienteDTO);
 
@@ -224,7 +207,7 @@ public class ClienteServiceTest {
         clienteDTO.setMail("no_valid@ooo");
 
         clienteDTO.setId(3);
-        Cliente cliente = toEntity(clienteDTO);
+        Cliente cliente = ClienteMapper.toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
         ClienteDTO clienteGuardado = clienteService.guardar(clienteDTO);
 
@@ -238,7 +221,7 @@ public class ClienteServiceTest {
         clienteDTO.setMail("mail__@valido.com.ar");
 
         clienteDTO.setId(3);
-        cliente = toEntity(clienteDTO);
+        cliente = ClienteMapper.toEntity(clienteDTO);
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
         clienteGuardado = clienteService.guardar(clienteDTO);
 
