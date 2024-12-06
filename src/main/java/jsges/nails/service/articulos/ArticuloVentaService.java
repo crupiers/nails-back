@@ -3,6 +3,8 @@ package jsges.nails.service.articulos;
 import jsges.nails.DTO.articulos.ArticuloVentaDTO;
 import jsges.nails.domain.articulos.ArticuloVenta;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.mappers.ArticuloVentaMapper;
+import jsges.nails.mappers.LineaMapper;
 import jsges.nails.repository.articulos.ArticuloVentaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +57,7 @@ public class ArticuloVentaService implements IArticuloVentaService{
     }
 
     @Override
-    public ArticuloVenta guardar(ArticuloVentaDTO model) {
+    public ArticuloVentaDTO guardar(ArticuloVentaDTO model) {
 
         logger.info("entra" );
 
@@ -63,12 +65,12 @@ public class ArticuloVentaService implements IArticuloVentaService{
 
         ArticuloVenta newModel =  new ArticuloVenta();
         newModel.setNombre(model.nombre);
-        newModel.setLinea(lineaService.buscarPorId(idLinea));
+        newModel.setLinea(LineaMapper.toEntity(lineaService.buscarPorId(idLinea)));
 
         //ArticuloVenta modelSave= modelService.guardar(newModel);
 
 
-        return modelRepository.save(newModel);
+        return ArticuloVentaMapper.toDTO(modelRepository.save(newModel));
     }
 
     @Override
@@ -127,7 +129,7 @@ public class ArticuloVentaService implements IArticuloVentaService{
     }
     */
 
-public ArticuloVenta actualizar(Integer id, ArticuloVentaDTO modelRecibido){
+public ArticuloVentaDTO actualizar(Integer id, ArticuloVentaDTO modelRecibido){
 
     logger.info("articulo " +modelRecibido);
     ArticuloVenta model = modelRepository.findById(id).orElse(null);
@@ -137,9 +139,9 @@ public ArticuloVenta actualizar(Integer id, ArticuloVentaDTO modelRecibido){
     }
     logger.info("articulo " +model);
     model.setNombre(modelRecibido.nombre);
-    model.setLinea(lineaService.buscarPorId(modelRecibido.linea));
-    modelRepository.save(model);
-    return     modelRepository.save(model);
+    model.setLinea(LineaMapper.toEntity(lineaService.buscarPorId(modelRecibido.linea)));
+    //modelRepository.save(model);
+    return   ArticuloVentaMapper.toDTO(modelRepository.save(model));
 }
 
 }

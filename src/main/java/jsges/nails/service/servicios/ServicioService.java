@@ -7,6 +7,8 @@ import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
 import jsges.nails.domain.servicios.TipoServicio;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.mappers.ClienteMapper;
+import jsges.nails.mappers.ServicioMapper;
 import jsges.nails.repository.servicios.ServicioRepository;
 import jsges.nails.service.organizacion.IClienteService;
 import org.slf4j.Logger;
@@ -67,12 +69,12 @@ public class ServicioService implements IServicioService {
     }
 
     @Override
-    public Servicio guardar(ServicioDTO model) {
+    public ServicioDTO guardar(ServicioDTO model) {
 
         Integer idCliente = model.cliente;
 
         Servicio newModel =  new Servicio();
-        newModel.setCliente(clienteService.buscarPorId(idCliente));
+        newModel.setCliente(ClienteMapper.toEntity(clienteService.buscarPorId(idCliente)));
         newModel.setFechaRegistro(model.fechaDocumento);
         newModel.setFechaRealizacion(model.fechaDocumento);
         newModel.setEstado(0);
@@ -91,7 +93,7 @@ public class ServicioService implements IServicioService {
 
         }
 
-        return servicioGuardado;
+        return ServicioMapper.toDTO(servicioGuardado);
     }
 
 

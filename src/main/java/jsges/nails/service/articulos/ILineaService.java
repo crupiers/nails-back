@@ -12,9 +12,9 @@ public interface ILineaService {
 
     public List<LineaDTO> listar();
 
-    public Linea buscarPorId(Integer id);
+    public LineaDTO buscarPorId(Integer id);
 
-    public Linea guardar(Linea model);
+    public LineaDTO guardar(LineaDTO model);
 
     public Void eliminar(Integer id);
 
@@ -26,7 +26,7 @@ public interface ILineaService {
 
     public List<Linea> buscar(String consulta);
 
-    public Linea newModel(LineaDTO model);
+    //public Linea newModel(LineaDTO model);
 
     public LineaDTO actualizar(Integer id, LineaDTO modelRecibido);
 }

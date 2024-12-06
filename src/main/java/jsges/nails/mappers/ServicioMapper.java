@@ -8,22 +8,28 @@ import java.util.List;
 
 public abstract class ServicioMapper {
 
-    public static ServicioDTO toDTO(Servicio model) {
+    public static ServicioDTO toDTO(Servicio entity) {
+        if(entity == null) {
+            return null;
+        }
         ServicioDTO dto = new ServicioDTO();
-        dto.setId(model.getId());
-        dto.setNombre(model.getNombre());
-        dto.setObservacion(model.getObservacion());
-        dto.setTotal(model.getTotal());
+        dto.setId(entity.getId());
+        dto.setNombre(entity.getNombre());
+        dto.setObservacion(entity.getObservacion());
+        dto.setTotal(entity.getTotal());
         return dto;
     }
 
     public static Servicio toEntity(ServicioDTO dto) {
-        Servicio model = new Servicio();
-        model.setId(dto.getId());
-        model.setNombre(dto.getNombre());
-        model.setObservacion(dto.getObservacion());
-        model.setTotal(dto.getTotal());
-        return model;
+        if(dto == null) {
+            return null;
+        }
+        Servicio entity = new Servicio();
+        entity.setId(dto.getId());
+        entity.setNombre(dto.getNombre());
+        entity.setObservacion(dto.getObservacion());
+        entity.setTotal(dto.getTotal());
+        return entity;
     }
 
 

@@ -5,22 +5,28 @@ import jsges.nails.domain.servicios.ItemServicio;
 
 public abstract class ItemServicioMapper {
 
-    public static ItemServicioDTO toDTO(ItemServicio model) {
+    public static ItemServicioDTO toDTO(ItemServicio entity) {
+        if(entity == null) {
+            return null;
+        }
         ItemServicioDTO dto = new ItemServicioDTO();
-        dto.setId(model.getId());
-        dto.setNombre(model.getNombre());
-        dto.setObservacion(model.getObservacion());
-        dto.setPrecio(model.getPrecio());
+        dto.setId(entity.getId());
+        dto.setNombre(entity.getNombre());
+        dto.setObservacion(entity.getObservacion());
+        dto.setPrecio(entity.getPrecio());
         return dto;
     }
 
     public static ItemServicio toEntity(ItemServicioDTO dto) {
-        ItemServicio model = new ItemServicio();
-        model.setId(dto.getId());
-        model.setNombre(dto.getNombre());
-        model.setObservacion(dto.getObservacion());
-        model.setPrecio(dto.getPrecio());
-        return model;
+        if(dto == null) {
+            return null;
+        }
+        ItemServicio entity = new ItemServicio();
+        entity.setId(dto.getId());
+        entity.setNombre(dto.getNombre());
+        entity.setObservacion(dto.getObservacion());
+        entity.setPrecio(dto.getPrecio());
+        return entity;
     }
 
 }

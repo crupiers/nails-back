@@ -44,8 +44,8 @@ public class LineaController {
 
 
     @PostMapping("/linea")
-    public  ResponseEntity<Linea> agregar(@RequestBody LineaDTO model){
-        return ResponseEntity.ok(modelService.newModel(model));
+    public  ResponseEntity<LineaDTO> agregar(@RequestBody LineaDTO model){
+        return ResponseEntity.ok(modelService.guardar(model));
     }
 
     @PutMapping("/lineaEliminar/{id}")
@@ -54,7 +54,7 @@ public class LineaController {
     }
 
     @GetMapping("/linea/{id}")
-    public ResponseEntity<Linea> getPorId(@PathVariable Integer id){
+    public ResponseEntity<LineaDTO> getPorId(@PathVariable Integer id){
         return ResponseEntity.ok(modelService.buscarPorId(id));
     }
 

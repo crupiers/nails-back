@@ -46,7 +46,7 @@ public class ClienteControlador {
 
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> agregar(@RequestBody ClienteDTO cliente){
+    public ResponseEntity<ClienteDTO> agregar(@RequestBody ClienteDTO cliente){
         return ResponseEntity.ok(clienteServicio.guardar(cliente));
     }
 
@@ -57,12 +57,12 @@ public class ClienteControlador {
     }
 
     @GetMapping("/cliente/{id}")
-    public ResponseEntity<Cliente> getPorId(@PathVariable Integer id){
+    public ResponseEntity<ClienteDTO> getPorId(@PathVariable Integer id){
         return ResponseEntity.ok(clienteServicio.buscarPorId(id));
     }
 
     @PutMapping("/clientes/{id}")
-    public ResponseEntity<Cliente> actualizar(@PathVariable Integer id,
+    public ResponseEntity<ClienteDTO> actualizar(@PathVariable Integer id,
                                               @RequestBody Cliente modelRecibido){
         return ResponseEntity.ok(clienteServicio.actualizar(id, modelRecibido));
     }

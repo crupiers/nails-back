@@ -16,7 +16,7 @@ public interface IServicioService {
 
     public ServicioDTO buscarPorId(Integer id);
 
-    public Servicio guardar(ServicioDTO model);
+    public ServicioDTO guardar(ServicioDTO model);
 
    // public Page<ServicioDTO> findPaginated(Pageable pageable,String consulta);
 

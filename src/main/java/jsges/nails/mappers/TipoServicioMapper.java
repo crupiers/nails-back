@@ -5,20 +5,26 @@ import jsges.nails.domain.servicios.TipoServicio;
 
 public abstract class TipoServicioMapper {
 
-    public static TipoServicioDTO toDTO(TipoServicio model) {
+    public static TipoServicioDTO toDTO(TipoServicio entity) {
+        if(entity == null) {
+            return null;
+        }
         TipoServicioDTO dto = new TipoServicioDTO();
-        dto.setId(model.getId());
-        dto.setNombre(model.getNombre());
-        dto.setObservacion(model.getObservacion());
+        dto.setId(entity.getId());
+        dto.setNombre(entity.getNombre());
+        dto.setObservacion(entity.getObservacion());
         return dto;
     }
 
     public static TipoServicio toEntity(TipoServicioDTO dto) {
-        TipoServicio model = new TipoServicio();
-        model.setId(dto.getId());
-        model.setNombre(dto.getNombre());
-        model.setObservacion(dto.getObservacion());
-        return model;
+        if(dto == null) {
+            return null;
+        }
+        TipoServicio entity = new TipoServicio();
+        entity.setId(dto.getId());
+        entity.setNombre(dto.getNombre());
+        entity.setObservacion(dto.getObservacion());
+        return entity;
     }
 
 }

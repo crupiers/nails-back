@@ -62,7 +62,7 @@ public class ServicioController {
      */
 
     @PostMapping("/servicios")
-    public ResponseEntity<Servicio> agregar(@RequestBody ServicioDTO model){
+    public ResponseEntity<ServicioDTO> agregar(@RequestBody ServicioDTO model){
         return ResponseEntity.ok(modelService.guardar(model));
     }
 }

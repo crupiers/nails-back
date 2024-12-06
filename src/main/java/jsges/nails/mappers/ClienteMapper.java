@@ -5,34 +5,40 @@ import jsges.nails.domain.organizacion.Cliente;
 
 public abstract class ClienteMapper {
 
-    public static ClienteDTO toDTO(Cliente model) {
-        ClienteDTO dto = new ClienteDTO(model);
-        dto.setId(model.getId());
-        dto.setNombre(model.getNombre());
-        dto.setObservacion(model.getObservacion());
-        dto.setRazonSocial(model.getRazonSocial());
-        dto.setLetra(model.getLetra());
-        dto.setContacto(model.getContacto());
-        dto.setCelular(model.getCelular());
-        dto.setMail(model.getMail());
-        dto.setFechaInicio(model.getFechaInicio());
-        dto.setFechaNacimiento(model.getFechaNacimiento());
+    public static ClienteDTO toDTO(Cliente entity) {
+        if(entity == null) {
+            return null;
+        }
+        ClienteDTO dto = new ClienteDTO(entity);
+        dto.setId(entity.getId());
+        dto.setNombre(entity.getNombre());
+        dto.setObservacion(entity.getObservacion());
+        dto.setRazonSocial(entity.getRazonSocial());
+        dto.setLetra(entity.getLetra());
+        dto.setContacto(entity.getContacto());
+        dto.setCelular(entity.getCelular());
+        dto.setMail(entity.getMail());
+        dto.setFechaInicio(entity.getFechaInicio());
+        dto.setFechaNacimiento(entity.getFechaNacimiento());
         return dto;
     }
 
     public static Cliente toEntity(ClienteDTO dto) {
-        Cliente model = new Cliente();
-        model.setId(dto.getId());
-        model.setNombre(dto.getNombre());
-        model.setObservacion(dto.getObservacion());
-        model.setRazonSocial(dto.getRazonSocial());
-        model.setLetra(dto.getLetra());
-        model.setContacto(dto.getContacto());
-        model.setCelular(dto.getCelular());
-        model.setMail(dto.getMail());
-        model.setFechaInicio(dto.getFechaInicio());
-        model.setFechaNacimiento(dto.getFechaNacimiento());
-        return model;
+        if(dto == null) {
+            return null;
+        }
+        Cliente entity = new Cliente();
+        entity.setId(dto.getId());
+        entity.setNombre(dto.getNombre());
+        entity.setObservacion(dto.getObservacion());
+        entity.setRazonSocial(dto.getRazonSocial());
+        entity.setLetra(dto.getLetra());
+        entity.setContacto(dto.getContacto());
+        entity.setCelular(dto.getCelular());
+        entity.setMail(dto.getMail());
+        entity.setFechaInicio(dto.getFechaInicio());
+        entity.setFechaNacimiento(dto.getFechaNacimiento());
+        return entity;
     }
 
 }

@@ -10,9 +10,9 @@ import java.util.List;
 public interface IClienteService {
     public List<ClienteDTO> listar();
 
-    public Cliente buscarPorId(Integer id);
+    public ClienteDTO buscarPorId(Integer id);
 
-    public Cliente guardar(ClienteDTO cliente);
+    public ClienteDTO guardar(ClienteDTO cliente);
 
     public Void eliminar(Integer id);
 
@@ -22,6 +22,6 @@ public interface IClienteService {
 
    // public Page<ClienteDTO> findPaginated(Pageable pageable, String consulta);
 
-    public Cliente actualizar(Integer id, Cliente modelRecibido);
+    public ClienteDTO actualizar(Integer id, Cliente modelRecibido);
 
 }

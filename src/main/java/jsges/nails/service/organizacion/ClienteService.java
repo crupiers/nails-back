@@ -3,6 +3,7 @@ package jsges.nails.service.organizacion;
 import jsges.nails.DTO.Organizacion.ClienteDTO;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.mappers.ClienteMapper;
 import jsges.nails.repository.organizacion.ClienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,17 +36,17 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public Cliente buscarPorId(Integer id) {
+    public ClienteDTO buscarPorId(Integer id) {
 
         Cliente cliente =  clienteRepository.findById(id).orElse(null);
         if(cliente == null)
             throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
 
-        return cliente;
+        return ClienteMapper.toDTO(cliente);
     }
 
     @Override
-    public Cliente guardar(ClienteDTO cliente) {
+    public ClienteDTO guardar(ClienteDTO cliente) {
 
         //PASAMOS DE DTO A ENTIDAD
         Cliente model = new Cliente();
@@ -61,13 +62,13 @@ public class ClienteService implements IClienteService {
         model.setFechaInicio(cliente.getFechaInicio());
         model.setFechaNacimiento(cliente.getFechaNacimiento());
 
-        return clienteRepository.save(model);
+        return ClienteMapper.toDTO(clienteRepository.save(model));
     }
 
     @Override
     public Void eliminar(Integer id) {
 
-        Cliente model = this.buscarPorId(id);
+        Cliente model = ClienteMapper.toEntity(this.buscarPorId(id));
         if (model == null)
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
 
@@ -115,12 +116,12 @@ public class ClienteService implements IClienteService {
     }
      */
 
-    public Cliente actualizar(Integer id, Cliente modelRecibido) {
-        Cliente model = this.buscarPorId(id);
+    public ClienteDTO actualizar(Integer id, Cliente modelRecibido) {
+        Cliente model = ClienteMapper.toEntity(this.buscarPorId(id));
         if (model == null)
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
 
-        return this.clienteRepository.save(modelRecibido);
+        return ClienteMapper.toDTO(clienteRepository.save(modelRecibido));
     }
 
 }

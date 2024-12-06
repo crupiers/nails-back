@@ -13,7 +13,7 @@ public interface IArticuloVentaService {
 
     public ArticuloVentaDTO buscarPorId(Integer id);
 
-    public ArticuloVenta guardar(ArticuloVentaDTO model);
+    public ArticuloVentaDTO guardar(ArticuloVentaDTO model);
 
     public Void eliminar(Integer id);
 
@@ -23,6 +23,6 @@ public interface IArticuloVentaService {
 
    // public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, String consulta);
 
-    public ArticuloVenta actualizar(Integer id, ArticuloVentaDTO modelRecibido);
+    public ArticuloVentaDTO actualizar(Integer id, ArticuloVentaDTO modelRecibido);
 
 }

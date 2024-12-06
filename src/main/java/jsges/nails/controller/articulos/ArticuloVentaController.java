@@ -50,7 +50,7 @@ public class ArticuloVentaController {
 
 
     @PostMapping("/articulos")
-    public ResponseEntity<ArticuloVenta> agregar(@RequestBody ArticuloVentaDTO model){
+    public ResponseEntity<ArticuloVentaDTO> agregar(@RequestBody ArticuloVentaDTO model){
         return ResponseEntity.ok(modelService.guardar(model));
     }
 
@@ -66,7 +66,7 @@ public class ArticuloVentaController {
     }
 
     @PutMapping("/articulos/{id}")
-    public ResponseEntity<ArticuloVenta> actualizar(@PathVariable Integer id,
+    public ResponseEntity<ArticuloVentaDTO> actualizar(@PathVariable Integer id,
                                                     @RequestBody ArticuloVentaDTO modelRecibido){
       return ResponseEntity.ok(modelService.actualizar(id, modelRecibido));
     }

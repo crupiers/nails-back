@@ -3,6 +3,7 @@ package jsges.nails.service.articulos;
 import jsges.nails.DTO.articulos.LineaDTO;
 import jsges.nails.domain.articulos.Linea;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.mappers.LineaMapper;
 import jsges.nails.repository.articulos.LineaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class LineaService implements ILineaService {
     }
 
     @Override
-    public Linea buscarPorId(Integer id) {
+    public LineaDTO buscarPorId(Integer id) {
 
         Linea linea = modelRepository.findById(id).orElse(null);
         if(linea == null){
@@ -46,19 +47,14 @@ public class LineaService implements ILineaService {
         }
         //LineaDTO model = new LineaDTO(linea);
 
-        return linea;
+        return LineaMapper.toDTO(linea);
     }
 
 
 
-    @Override
-    public Linea guardar(Linea model) {
-        return modelRepository.save(model);
-    }
-
 
     @Override
-    public Linea newModel(LineaDTO modelDTO) {
+    public LineaDTO guardar(LineaDTO modelDTO) {
 
         List<Linea> list = this.buscar(modelDTO.nombre);
         if (!list.isEmpty()){
@@ -71,14 +67,14 @@ public class LineaService implements ILineaService {
 
         //Linea nuevaLinea = modelService.newModel(model);
 
-        return guardar(model);
+        return LineaMapper.toDTO(modelRepository.save(model));
     }
 
 
     @Override
     public Void eliminar(Integer id) {
 
-        Linea model = this.buscarPorId(id);
+        Linea model = LineaMapper.toEntity(this.buscarPorId(id));
 
 
        // if (model == null){
@@ -141,12 +137,12 @@ public class LineaService implements ILineaService {
     */
 
     public LineaDTO actualizar(Integer id, LineaDTO modelRecibido){
-        Linea model = this.buscarPorId(modelRecibido.id);
+        Linea model = LineaMapper.toEntity(this.buscarPorId(modelRecibido.id));
         //if (model == null){
         //    throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         //}
         model.setNombre(modelRecibido.nombre);
-        return new LineaDTO(this.guardar(model));
+        return new LineaDTO(modelRepository.save(model));
 
     }
 
