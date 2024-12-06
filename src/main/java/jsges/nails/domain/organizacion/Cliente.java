@@ -31,7 +31,7 @@ public class Cliente extends TipoObjeto {
         @Column(columnDefinition = "TEXT")
         String celular;
         @Column(columnDefinition = "TEXT")
-        @Email
+        @Email(message = "EMAIL NO VÁLIDO", regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$")
         String mail;
 
         Date fechaInicio;
