@@ -41,22 +41,20 @@ public class ClienteControllerTest {
 
         ClienteDTO clienteNuevo = new ClienteDTO();
         clienteNuevo.setId(1);
-        clienteNuevo.setNombre("CLIENTE 1");
-        clienteNuevo.setObservacion("cliente de prueba");
+        clienteNuevo.setRazonSocial("CLIENTE 1");
+        clienteNuevo.setContacto("Chacabuco 500");
 
         when(clienteService.guardar(clienteNuevo)).thenReturn(clienteNuevo);
 
         mockMvc.perform(post("http://localhost:8080/nails/clientes")
                         .contentType("application/json")
-                        .content("{\"id\":1,\"nombre\":\"CLIENTE 1\",\"observacion\":\"cliente de prueba\"}")
+                        .content("{\"id\":1,\"razonSocial\":\"CLIENTE 1\",\"contacto\":\"Chacabuco 500\"}")
 
         ).andExpect(status().isOk()
         ).andExpect(jsonPath("$.id",is(1))
-        ).andExpect(jsonPath("$.nombre",is("CLIENTE 1"))
-        ).andExpect(jsonPath("$.observacion",is("cliente de prueba"))
-        ).andExpect(jsonPath("$.razonSocial",is(nullValue()))
+        ).andExpect(jsonPath("$.razonSocial",is("CLIENTE 1"))
         ).andExpect(jsonPath("$.letra",is(nullValue()))
-        ).andExpect(jsonPath("$.contacto",is(nullValue()))
+        ).andExpect(jsonPath("$.contacto",is("Chacabuco 500"))
         ).andExpect(jsonPath("$.celular",is(nullValue()))
         ).andExpect(jsonPath("$.mail",is(nullValue()))
         ).andExpect(jsonPath("$.fechaInicio",is(nullValue()))
@@ -69,22 +67,20 @@ public class ClienteControllerTest {
 
         ClienteDTO clienteNuevo = new ClienteDTO();
         clienteNuevo.setId(2);
-        clienteNuevo.setNombre("CLIENTE 2");
-        clienteNuevo.setObservacion("cliente de prueba con mail bien");
+        clienteNuevo.setRazonSocial("CLIENTE 2");
+        clienteNuevo.setLetra("cliente de prueba con mail bien");
         clienteNuevo.setMail("mail@bien.com");
 
         when(clienteService.guardar(clienteNuevo)).thenReturn(clienteNuevo);
 
         mockMvc.perform(post("http://localhost:8080/nails/clientes")
                 .contentType("application/json")
-                .content("{\"id\":2,\"nombre\":\"CLIENTE 2\",\"observacion\":\"cliente de prueba con mail bien\",\"mail\":\"mail@bien.com\"}")
+                .content("{\"id\":2,\"razonSocial\":\"CLIENTE 2\",\"letra\":\"cliente de prueba con mail bien\",\"mail\":\"mail@bien.com\"}")
 
         ).andExpect(status().isOk()
         ).andExpect(jsonPath("$.id",is(2))
-        ).andExpect(jsonPath("$.nombre",is("CLIENTE 2"))
-        ).andExpect(jsonPath("$.observacion",is("cliente de prueba con mail bien"))
-        ).andExpect(jsonPath("$.razonSocial",is(nullValue()))
-        ).andExpect(jsonPath("$.letra",is(nullValue()))
+        ).andExpect(jsonPath("$.razonSocial",is("CLIENTE 2"))
+        ).andExpect(jsonPath("$.letra",is("cliente de prueba con mail bien"))
         ).andExpect(jsonPath("$.contacto",is(nullValue()))
         ).andExpect(jsonPath("$.celular",is(nullValue()))
         ).andExpect(jsonPath("$.mail",is("mail@bien.com"))
@@ -98,15 +94,15 @@ public class ClienteControllerTest {
 
         ClienteDTO clienteNuevo = new ClienteDTO();
         clienteNuevo.setId(3);
-        clienteNuevo.setNombre("CLIENTE 3");
-        clienteNuevo.setObservacion("cliente de prueba con mail mal");
+        clienteNuevo.setRazonSocial("CLIENTE 3");
+        clienteNuevo.setLetra("cliente de prueba con mail mal");
         clienteNuevo.setMail("mail@mal.");
 
         when(clienteService.guardar(clienteNuevo)).thenReturn(clienteNuevo);
 
         mockMvc.perform(post("http://localhost:8080/nails/clientes")
                 .contentType("application/json")
-                .content("{\"id\":3,\"nombre\":\"CLIENTE 3\",\"observacion\":\"cliente de prueba con mail mal\",\"mail\":\"mail@mal.\"}")
+                .content("{\"id\":3,\"razonSocial\":\"CLIENTE 3\",\"letra\":\"cliente de prueba con mail mal\",\"mail\":\"mail@mal.\"}")
 
         ).andExpect(status().isBadRequest());
 

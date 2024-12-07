@@ -29,9 +29,6 @@ public class ClienteServiceTest {
 
     private ClienteDTO clienteDTO;
 
-    private String nombre;
-    private String observacion;
-
     private String razonSocial;
     private String letra;
     private String contacto;
@@ -50,9 +47,6 @@ public class ClienteServiceTest {
 
         clienteDTO = new ClienteDTO();
 
-        nombre = "Juan Pérez";
-        observacion = "Primer clienteDTO";
-
         razonSocial = "Juancito SA";
         letra = "RI";
         contacto = "Miami 2500";
@@ -60,9 +54,6 @@ public class ClienteServiceTest {
         mail = "juancitosa@hotmail.com";
         fechaInicio = new Date(2024, 9, 12);
         fechaNacimiento = new Date(2002, 8, 10);
-
-        clienteDTO.setNombre(nombre);
-        clienteDTO.setObservacion(observacion);
 
         clienteDTO.setRazonSocial(razonSocial);
         clienteDTO.setLetra(letra);
@@ -83,7 +74,6 @@ public class ClienteServiceTest {
         assertNotEquals(clienteGuardado.getId(),null);
 
         assertEquals(clienteDTO.getId(), clienteGuardado.getId());
-        assertEquals(clienteDTO.getNombre(), clienteGuardado.getNombre());
         assertEquals(clienteDTO.getRazonSocial(), clienteGuardado.getRazonSocial());
         assertEquals(clienteDTO.getMail(), clienteGuardado.getMail());
         assertEquals(clienteDTO.getFechaInicio(), clienteGuardado.getFechaInicio());
@@ -95,9 +85,6 @@ public class ClienteServiceTest {
 
         clienteDTO = new ClienteDTO();
 
-        nombre = "Juan Pérez";
-        observacion = "Primer clienteDTO";
-
         razonSocial = "Juancito SA";
         letra = "RI";
         contacto = "Miami 2500";
@@ -105,9 +92,6 @@ public class ClienteServiceTest {
         mail = "juancitosa@hotmail.com";
         fechaInicio = new Date(2024, 9, 12);
         fechaNacimiento = new Date(2002, 8, 10);
-
-        clienteDTO.setNombre(nombre);
-        clienteDTO.setObservacion(observacion);
 
         clienteDTO.setRazonSocial(razonSocial);
         clienteDTO.setLetra(letra);
@@ -126,9 +110,6 @@ public class ClienteServiceTest {
 
         clienteDTO = new ClienteDTO();
 
-        nombre = "Tomás García";
-        observacion = "Segundo clienteDTO";
-
         razonSocial = "García y Compañía";
         letra = "RI";
         contacto = "Chubut 3500";
@@ -136,9 +117,6 @@ public class ClienteServiceTest {
         mail = "tomiycia@gmail.com";
         fechaInicio = new Date(2024, 10, 21);
         fechaNacimiento = new Date(2000, 3, 15);
-
-        clienteDTO.setNombre(nombre);
-        clienteDTO.setObservacion(observacion);
 
         clienteDTO.setRazonSocial(razonSocial);
         clienteDTO.setLetra(letra);
@@ -180,9 +158,6 @@ public class ClienteServiceTest {
 
         clienteDTO = new ClienteDTO();
 
-        nombre = "Paulina Giménez";
-        observacion = "Una clienteDTO";
-
         razonSocial = "Paulita SA";
         letra = "M";
         contacto = "Chacabuco 2000";
@@ -190,9 +165,6 @@ public class ClienteServiceTest {
         //mail = "juancitosa@hotmail.com";
         fechaInicio = new Date(2023, 2, 8);
         fechaNacimiento = new Date(2007, 9, 20);
-
-        clienteDTO.setNombre(nombre);
-        clienteDTO.setObservacion(observacion);
 
         clienteDTO.setRazonSocial(razonSocial);
         clienteDTO.setLetra(letra);
