@@ -62,7 +62,7 @@ public class LineaService implements ILineaService {
             //return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
 
-        Linea model =  new Linea(modelDTO);
+        Linea model =  LineaMapper.toEntity(modelDTO);
 
 
         //Linea nuevaLinea = modelService.newModel(model);
@@ -138,10 +138,9 @@ public class LineaService implements ILineaService {
 
     public LineaDTO actualizar(Integer id, LineaDTO modelRecibido){
         Linea model = LineaMapper.toEntity(this.buscarPorId(modelRecibido.id));
-        //if (model == null){
-        //    throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-        //}
-        model.setDenominacion(modelRecibido.denominacion);
+        if (model == null){
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+        }
         return new LineaDTO(modelRepository.save(model));
 
     }

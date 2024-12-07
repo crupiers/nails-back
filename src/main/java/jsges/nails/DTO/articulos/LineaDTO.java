@@ -29,7 +29,9 @@ public class LineaDTO  {
     }
 
     public LineaDTO(Linea linea) {
-        this.id= linea.getId();
-        this.denominacion = linea.getDenominacion();
+        this.setId(linea.getId());
+        this.setDetalle(linea.getDetalle());
+        this.setDenominacion(linea.getDenominacion());
+        this.setCodigo(linea.getCodigo());
     }
 }
