@@ -138,4 +138,16 @@ public class ServicioService implements IServicioService {
         return modelRepository.buscarNoEliminados(consulta);
     }
 
+    @Override
+    public Void eliminar(Integer id) {
+
+        Servicio model = ServicioMapper.toEntity(this.buscarPorId(id));
+        if (model == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+
+        model.asEliminado();
+        modelRepository.save(model);
+        return null;
+    }
+
 }

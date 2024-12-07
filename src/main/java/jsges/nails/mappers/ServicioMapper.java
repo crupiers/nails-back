@@ -35,6 +35,18 @@ public abstract class ServicioMapper {
         return entity;
     }
 
+    public static Servicio toEntity(ServicioDTO dto) {
+        if(dto == null) {
+            return null;
+        }
+        Servicio entity = new Servicio();
+        entity.setId(dto.getId());
+        entity.setFechaRegistro(dto.getFechaRegistro());
+        entity.setFechaRealizacion(dto.getFechaRealizacion());
+        entity.setTotal(dto.getTotal());
+        return entity;
+    }
+
 
 
 }

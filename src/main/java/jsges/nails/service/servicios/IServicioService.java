@@ -24,4 +24,7 @@ public interface IServicioService {
 
     public List<Servicio> listar(String consulta);
 
+    public Void eliminar(Integer id);
+
+
 }

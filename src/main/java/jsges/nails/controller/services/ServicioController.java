@@ -66,5 +66,11 @@ public class ServicioController {
     public ResponseEntity<ServicioDTO> agregar(@Valid @RequestBody ServicioDTO model){
         return ResponseEntity.ok(modelService.guardar(model));
     }
+
+    @DeleteMapping("/servicioEliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id){
+        return ResponseEntity.ok(modelService.eliminar(id));
+    }
+
 }
 
