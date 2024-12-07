@@ -103,7 +103,7 @@ public class ServicioService implements IServicioService {
     }
 
 
-/**
+
     @Override
     public Page<ServicioDTO> findPaginated(Pageable pageable, String consulta) {
 
@@ -131,7 +131,7 @@ public class ServicioService implements IServicioService {
 
         return bookPage;
     }
- */
+
 
     @Override
     public List<Servicio> listar(String consulta) {

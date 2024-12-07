@@ -104,7 +104,7 @@ public class LineaService implements ILineaService {
     }
 
 
-    /**
+
     @Override
     public Page<LineaDTO> findPaginated(Pageable pageable, String consulta) {
 
@@ -134,7 +134,7 @@ public class LineaService implements ILineaService {
 
         return bookPage;
     }
-    */
+
 
     public LineaDTO actualizar(Integer id, LineaDTO modelRecibido){
         Linea model = LineaMapper.toEntity(this.buscarPorId(modelRecibido.id));

@@ -99,7 +99,7 @@ public class ArticuloVentaService implements IArticuloVentaService{
         return  modelRepository.findAll(pageable);
     }
 
-  /**
+
     @Override
     public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, String consulta) {
 
@@ -127,7 +127,7 @@ public class ArticuloVentaService implements IArticuloVentaService{
 
         return bookPage;
     }
-    */
+
 
 public ArticuloVentaDTO actualizar(Integer id, ArticuloVentaDTO modelRecibido){
 

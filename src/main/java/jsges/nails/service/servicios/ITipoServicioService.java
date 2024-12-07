@@ -21,7 +21,7 @@ public interface ITipoServicioService {
 
     public Page<TipoServicio> getTiposServicios(Pageable pageable);
 
-   // public Page<TipoServicio> findPaginated(Pageable pageable,String consulta);
+    public Page<TipoServicio> findPaginated(Pageable pageable,String consulta);
 
 
     public List<TipoServicio> buscar(String consulta);

@@ -41,13 +41,13 @@ public class ArticuloVentaController {
         return ResponseEntity.ok(modelService.listar());
     }
 
-    /**
+
     @GetMapping({"/articulosPageQuery"})
     public ResponseEntity<Page<ArticuloVentaDTO>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                         @RequestParam(defaultValue = "${max_page}") int size) {
         return ResponseEntity.ok().body(modelService.findPaginated(PageRequest.of(page, size),consulta));
     }
-     */
+
 
 
     @PostMapping("/articulos")

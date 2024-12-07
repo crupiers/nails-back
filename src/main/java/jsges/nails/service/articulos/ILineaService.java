@@ -21,7 +21,7 @@ public interface ILineaService {
     public List<Linea> listar(String consulta);
     public Page<Linea> getLineas(Pageable pageable);
 
-    //public Page<LineaDTO> findPaginated(Pageable pageable,String consulta);
+    public Page<LineaDTO> findPaginated(Pageable pageable,String consulta);
 
 
     public List<Linea> buscar(String consulta);

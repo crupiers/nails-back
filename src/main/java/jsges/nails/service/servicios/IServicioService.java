@@ -18,7 +18,7 @@ public interface IServicioService {
 
     public ServicioDTO guardar(ServicioDTO model);
 
-   // public Page<ServicioDTO> findPaginated(Pageable pageable,String consulta);
+    public Page<ServicioDTO> findPaginated(Pageable pageable,String consulta);
 
     public Page<Servicio> getServicios(Pageable pageable);
 

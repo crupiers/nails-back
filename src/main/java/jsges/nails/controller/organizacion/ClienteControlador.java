@@ -37,13 +37,13 @@ public class ClienteControlador {
         return ResponseEntity.ok(clienteServicio.listar());
     }
 
-    /**
+
     @GetMapping({"/clientesPageQuery"})
     public ResponseEntity<Page<ClienteDTO>> getItems(@RequestParam(defaultValue = "") String consulta,@RequestParam(defaultValue = "0") int page,
                                                   @RequestParam(defaultValue = "${max_page}") int size) {
         return ResponseEntity.ok().body(clienteServicio.findPaginated(PageRequest.of(page, size),consulta));
     }
-     */
+
 
 
     @PostMapping("/clientes")

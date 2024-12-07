@@ -78,7 +78,7 @@ public class ClienteService implements IClienteService {
         return clienteRepository.findAll(pageable);
     }
 
-    /**
+
     public Page<ClienteDTO> findPaginated(Pageable pageable, String consulta) {
 
         List<Cliente> listado = this.listar(consulta);
@@ -103,7 +103,7 @@ public class ClienteService implements IClienteService {
 
         return bookPage;
     }
-     */
+
 
     public ClienteDTO actualizar(Integer id, Cliente modelRecibido) {
         Cliente model = ClienteMapper.toEntity(this.buscarPorId(id));
