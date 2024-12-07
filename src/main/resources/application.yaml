@@ -12,4 +12,4 @@ spring:
     banner-mode: off
 path_cross: http://localhost:5173
 path_mapping: nails
-page_max: 9
+max_page: 9
