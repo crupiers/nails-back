@@ -25,7 +25,7 @@ public class Cliente {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
-        @Column(columnDefinition = "TEXT", nullable = false, unique = true)
+        @Column(nullable = false, unique = true)
         @Size(min = 3, max = 64)
         private String razonSocial;
         @Column(nullable = false)
