@@ -52,7 +52,7 @@ public class ClienteControlador {
     }
 
 
-    @PutMapping("/clienteEliminar/{id}")
+    @DeleteMapping("/clienteEliminar/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id){
         return ResponseEntity.ok(clienteServicio.eliminar(id));
     }
