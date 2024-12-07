@@ -11,8 +11,6 @@ public abstract class ClienteMapper {
         }
         ClienteDTO dto = new ClienteDTO(entity);
         dto.setId(entity.getId());
-        dto.setNombre(entity.getNombre());
-        dto.setObservacion(entity.getObservacion());
         dto.setRazonSocial(entity.getRazonSocial());
         dto.setLetra(entity.getLetra());
         dto.setContacto(entity.getContacto());
@@ -29,8 +27,6 @@ public abstract class ClienteMapper {
         }
         Cliente entity = new Cliente();
         entity.setId(dto.getId());
-        entity.setNombre(dto.getNombre());
-        entity.setObservacion(dto.getObservacion());
         entity.setRazonSocial(dto.getRazonSocial());
         entity.setLetra(dto.getLetra());
         entity.setContacto(dto.getContacto());

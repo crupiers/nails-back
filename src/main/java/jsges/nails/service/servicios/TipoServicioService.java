@@ -43,7 +43,7 @@ public class TipoServicioService implements ITipoServicioService {
     @Override
     public TipoServicio guardar(TipoServicioDTO model) {
 
-        List<TipoServicio> list = this.buscar(model.nombre);
+        List<TipoServicio> list = this.buscar(model.denominacion);
         if (!list.isEmpty()){
             throw new NullPointerException();
             //return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -59,7 +59,7 @@ public class TipoServicioService implements ITipoServicioService {
     @Override
     public TipoServicio newModel(TipoServicioDTO modelDTO) {
         TipoServicio model =  new TipoServicio();
-        model.setNombre(modelDTO.nombre);
+        model.setDenominacion(modelDTO.denominacion);
         return modelRepository.save(model);
     }
 

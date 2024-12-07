@@ -12,17 +12,15 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class ServicioDTO extends TipoServicioDTO{
+public class ServicioDTO {
 
-    //public Integer id;
+    public Integer id;
     public Integer cliente;
-    public Timestamp fechaDocumento;
+    public Timestamp fechaRegistro;
+    public Timestamp fechaRealizacion;
     public Set<ItemServicioDTO> listaItems = new HashSet<>();
     public Double total;
     public String clienteRazonSocial;
-
-    public String tipoServicio ;
-    public Integer tipoServicioId ;
 
     public ServicioDTO() {
 
@@ -34,11 +32,9 @@ public class ServicioDTO extends TipoServicioDTO{
         this.id = elemento.getId();
         this.cliente = elemento.getCliente().getId();
         this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
-        this.fechaDocumento = elemento.getFechaRealizacion();
+        this.fechaRegistro = elemento.getFechaRegistro();
+        this.fechaRealizacion = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
-
-        this.tipoServicio=elemento.getTipo().getNombre();
-        this.tipoServicioId=elemento.getTipo().getId();
 
         list.forEach((model) -> {
            listaItems.add(new ItemServicioDTO(model));
@@ -50,11 +46,9 @@ public class ServicioDTO extends TipoServicioDTO{
         this.id = elemento.getId();
         this.cliente = elemento.getCliente().getId();
         this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
-        this.fechaDocumento = elemento.getFechaRealizacion();
+        this.fechaRegistro = elemento.getFechaRegistro();
+        this.fechaRealizacion = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
-
-        this.tipoServicio=elemento.getTipo().getNombre();
-        this.tipoServicioId=elemento.getTipo().getId();
 
 
     }

@@ -1,5 +1,5 @@
 package jsges.nails.DTO.Organizacion;
-import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.*;
 import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.organizacion.Cliente;
 import lombok.Data;
@@ -7,12 +7,17 @@ import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class ClienteDTO extends TipoServicioDTO {
+public class ClienteDTO  {
 
-    //private Integer id;
-    private String razonSocial;
+    @Positive
+    public Integer id;
+
+    @NotNull
+    @Size(min = 3, max = 64, message = "EL NOMBRE DEBE IR DE ENTRE 4 Y 64 CARACTERES")
+    @Pattern(regexp = "^[a-zA-Z0-9]+(\\s[a-zA-Z0-9]+)*$", message = "SÓLO PUEDEN HABER LETRAS Y NÚMEROS, NO TIENE QUE HABER ESPACIOS DOBLES NI ESPACIO AL INICIO NI AL FINAL")
+    public String razonSocial;
+
     private String letra;
     private String contacto;
     private String celular;

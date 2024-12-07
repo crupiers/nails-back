@@ -56,7 +56,7 @@ public class LineaService implements ILineaService {
     @Override
     public LineaDTO guardar(LineaDTO modelDTO) {
 
-        List<Linea> list = this.buscar(modelDTO.nombre);
+        List<Linea> list = this.buscar(modelDTO.denominacion);
         if (!list.isEmpty()){
             throw new NullPointerException();
             //return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -141,7 +141,7 @@ public class LineaService implements ILineaService {
         //if (model == null){
         //    throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         //}
-        model.setNombre(modelRecibido.nombre);
+        model.setDenominacion(modelRecibido.denominacion);
         return new LineaDTO(modelRepository.save(model));
 
     }

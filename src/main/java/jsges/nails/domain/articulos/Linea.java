@@ -1,8 +1,8 @@
 package jsges.nails.domain.articulos;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import jsges.nails.DTO.articulos.LineaDTO;
-import jsges.nails.domain.TipoObjeto;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,18 +10,29 @@ import lombok.ToString;
 @Entity
 @Data
 @ToString
-public class Linea extends TipoObjeto {
+public class Linea  {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Integer id;
+    public static final int ESTADO_DISPONIBLE = 0;
+    public static final int ESTADO_ELIMINADO = 1;
 
-    //@Column(columnDefinition = "TEXT")
-    //String denominacion;
-    //int estado;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    //@Column(columnDefinition = "TEXT")
-    //String observacion;
+    @Column(columnDefinition = "TEXT", nullable = false, unique = true)
+    @Size(min = 3, max = 64)
+    private String denominacion;
+    @Column(nullable = false)
+    private int estado = ESTADO_DISPONIBLE;
+    @Column(columnDefinition = "TEXT")
+    @Size(max = 240)
+    private String detalle;
+
+    public void asEliminado() {
+        this.setEstado(ESTADO_ELIMINADO);
+    }
+
+    private int codigo;
 
     public Linea() {
         // Constructor por defecto necesario para JPA
@@ -29,13 +40,13 @@ public class Linea extends TipoObjeto {
 
     public Linea(String nombre) {
 
-        this.setNombre(nombre);
+        this.setDenominacion(nombre);
     }
 
     public Linea(LineaDTO model) {
-        this.setNombre(model.nombre);
+        this.setDenominacion(model.denominacion);
         this.setId(model.getId());
-        this.setObservacion(model.getObservacion());
+        this.setDetalle(model.getDetalle());
     }
 }
 

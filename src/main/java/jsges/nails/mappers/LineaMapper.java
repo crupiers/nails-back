@@ -11,8 +11,9 @@ public abstract class LineaMapper {
         }
         LineaDTO dto = new LineaDTO();
         dto.setId(entity.getId());
-        dto.setNombre(entity.getNombre());
-        dto.setObservacion(entity.getObservacion());
+        dto.setCodigo(entity.getCodigo());
+        dto.setDenominacion(entity.getDenominacion());
+        dto.setDetalle(entity.getDetalle());
         return dto;
     }
 
@@ -22,8 +23,9 @@ public abstract class LineaMapper {
         }
         Linea entity = new Linea();
         entity.setId(dto.getId());
-        entity.setNombre(dto.getNombre());
-        entity.setObservacion(dto.getObservacion());
+        entity.setCodigo(dto.getCodigo());
+        entity.setDenominacion(dto.getDenominacion());
+        entity.setDetalle(dto.getDetalle());
         return entity;
     }
 

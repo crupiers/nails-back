@@ -11,8 +11,9 @@ public abstract class TipoServicioMapper {
         }
         TipoServicioDTO dto = new TipoServicioDTO();
         dto.setId(entity.getId());
-        dto.setNombre(entity.getNombre());
-        dto.setObservacion(entity.getObservacion());
+        dto.setCodigo(entity.getCodigo());
+        dto.setDenominacion(entity.getDenominacion());
+        dto.setDetalle(entity.getDetalle());
         return dto;
     }
 
@@ -22,8 +23,9 @@ public abstract class TipoServicioMapper {
         }
         TipoServicio entity = new TipoServicio();
         entity.setId(dto.getId());
-        entity.setNombre(dto.getNombre());
-        entity.setObservacion(dto.getObservacion());
+        entity.setCodigo(dto.getCodigo());
+        entity.setDenominacion(dto.getDenominacion());
+        entity.setDetalle(dto.getDetalle());
         return entity;
     }
 

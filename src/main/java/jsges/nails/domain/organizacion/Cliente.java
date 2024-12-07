@@ -2,14 +2,13 @@ package jsges.nails.domain.organizacion;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jsges.nails.domain.TipoObjeto;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -17,10 +16,24 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Cliente extends TipoObjeto {
+public class Cliente {
 
-        @Column(columnDefinition = "TEXT")
-        String razonSocial;
+        public static final int ESTADO_DISPONIBLE = 0;
+        public static final int ESTADO_ELIMINADO = 1;
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
+
+        @Column(columnDefinition = "TEXT", nullable = false, unique = true)
+        @Size(min = 3, max = 64)
+        private String razonSocial;
+        @Column(nullable = false)
+        private int estado = ESTADO_DISPONIBLE;
+
+        public void asEliminado() {
+                this.setEstado(ESTADO_ELIMINADO);
+        }
 
         @Column(columnDefinition = "TEXT")
         String letra;

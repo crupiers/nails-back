@@ -1,7 +1,6 @@
 package jsges.nails.domain.servicios;
 
 import jakarta.persistence.*;
-import jsges.nails.domain.TipoObjeto;
 import jsges.nails.domain.organizacion.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,17 +11,29 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @ToString
-public class Servicio extends TipoObjeto {
+public class Servicio {
 
-        @ManyToOne(cascade = CascadeType.ALL)
-        private Cliente cliente;
+    public static final int ESTADO_DISPONIBLE = 0;
+    public static final int ESTADO_ELIMINADO = 1;
 
-        private Timestamp fechaRegistro;
-        private Timestamp fechaRealizacion;
-        private double total;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
+    private int estado = ESTADO_DISPONIBLE;
+
+    public void asEliminado() {
+        this.setEstado(ESTADO_ELIMINADO);
+    }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private TipoServicio tipo;
+    private Cliente cliente;
+
+    private Timestamp fechaRegistro;
+    private Timestamp fechaRealizacion;
+    private double total;
+
 
 
     public Servicio() {
