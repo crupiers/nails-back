@@ -34,7 +34,8 @@ public class Linea extends TipoObjeto {
 
     public Linea(LineaDTO model) {
         this.setNombre(model.nombre);
-
+        this.setId(model.getId());
+        this.setObservacion(model.getObservacion());
     }
 }
 
