@@ -121,8 +121,7 @@ public class TipoServicioService implements ITipoServicioService {
         TipoServicio model = this.buscarPorId(id);
         if (model == null)
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-
-        return modelRepository.save(model);
+        return modelRepository.save(modelRecibido);
     }
 
 }
