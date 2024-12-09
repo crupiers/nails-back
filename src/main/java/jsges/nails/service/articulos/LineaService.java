@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class LineaService implements ILineaService {
@@ -137,12 +138,12 @@ public class LineaService implements ILineaService {
 
 
     public LineaDTO actualizar(Integer id, LineaDTO modelRecibido){
+        int idRecibido = modelRecibido.id;
         Linea model = LineaMapper.toEntity(this.buscarPorId(modelRecibido.id));
-        if (model == null){
+        if (model == null || !Objects.equals(idRecibido, modelRecibido.id)){
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         }
-        return new LineaDTO(modelRepository.save(model));
-
+        return new LineaDTO(modelRepository.save(LineaMapper.toEntity(modelRecibido)));
     }
 
     @Override
