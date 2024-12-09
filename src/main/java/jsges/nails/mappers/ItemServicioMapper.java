@@ -16,7 +16,7 @@ public abstract class ItemServicioMapper {
         dto.setObservacion(entity.getObservacion());
         dto.setPrecio(entity.getPrecio());
         dto.setTipoServicioId(entity.getTipoServicio().getId());
-        //dto.setTipoServicio(entity.getTipoServicio().getDenominacion());
+        dto.setTipoServicio(entity.getTipoServicio().getDenominacion());
         dto.setServicioId(entity.getServicio().getId());
         return dto;
     }

@@ -20,7 +20,7 @@ public class ItemServicioDTO  {
     @Pattern(regexp = "^[^\\s]+(\\s[^\\s]+)*$", message = "LA OBSERVACIÓN NO TIENE QUE HABER ESPACIOS DOBLES NI ESPACIO AL INICIO NI AL FINAL, NI PUEDE ESTAR VACÍO")
     public String observacion;
 
-    //private String tipoServicio;
+    private String tipoServicio;
     private Integer tipoServicioId;
 
     private Integer servicioId;
@@ -30,8 +30,7 @@ public class ItemServicioDTO  {
     public ItemServicioDTO(ItemServicio model) {
         this.id = model.getId();
         this.observacion=model.getObservacion();
-        this.precio=model.getPrecio();
-        //this.tipoServicio=model.getTipoServicio().getDenominacion();
+        this.tipoServicio=model.getTipoServicio().getDenominacion();
         this.tipoServicioId=model.getTipoServicio().getId();
         this.servicioId=model.getServicio().getId();
         this.precio=model.getPrecio();
