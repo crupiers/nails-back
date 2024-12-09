@@ -18,7 +18,7 @@ public class ServicioDTO {
     public Timestamp fechaRealizacion;
     public Set<ItemServicioDTO> listaItems = new HashSet<>();
     public Double total;
-    //public String clienteRazonSocial;
+    public String clienteRazonSocial;
 
     public ServicioDTO() {
 
@@ -29,7 +29,7 @@ public class ServicioDTO {
 
         this.id = elemento.getId();
         this.clienteId = elemento.getCliente().getId();
-        //this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
+        this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
         this.fechaRegistro = elemento.getFechaRegistro();
         this.fechaRealizacion = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
@@ -43,7 +43,7 @@ public class ServicioDTO {
 
         this.id = elemento.getId();
         this.clienteId = elemento.getCliente().getId();
-        //this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
+        this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
         this.fechaRegistro = elemento.getFechaRegistro();
         this.fechaRealizacion = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
