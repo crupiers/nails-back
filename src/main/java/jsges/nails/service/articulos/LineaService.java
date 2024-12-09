@@ -145,4 +145,15 @@ public class LineaService implements ILineaService {
 
     }
 
+    @Override
+    public Linea obtenerPorId(Integer id) {
+        Linea linea = modelRepository.findById(id).orElse(null);
+        if(linea == null){
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+            //return null;
+        }
+        //LineaDTO model = new LineaDTO(linea);
+
+        return linea;
+    }
 }

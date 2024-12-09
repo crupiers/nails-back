@@ -29,4 +29,8 @@ public interface ILineaService {
     //public Linea newModel(LineaDTO model);
 
     public LineaDTO actualizar(Integer id, LineaDTO modelRecibido);
+
+    public Linea obtenerPorId(Integer id);
+
+
 }

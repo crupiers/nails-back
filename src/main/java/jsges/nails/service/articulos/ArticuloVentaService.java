@@ -65,7 +65,7 @@ public class ArticuloVentaService implements IArticuloVentaService{
 
         ArticuloVenta newModel =  new ArticuloVenta();
         newModel.setDenominacion(model.denominacion);
-        newModel.setLinea(LineaMapper.toEntity(lineaService.buscarPorId(idLinea)));
+        newModel.setLinea(lineaService.obtenerPorId(idLinea));
 
         //ArticuloVenta modelSave= modelService.guardar(newModel);
 
