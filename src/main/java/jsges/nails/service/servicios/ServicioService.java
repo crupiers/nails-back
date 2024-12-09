@@ -3,6 +3,7 @@ import jsges.nails.DTO.articulos.ArticuloVentaDTO;
 import jsges.nails.DTO.servicios.ItemServicioDTO;
 import jsges.nails.DTO.servicios.ServicioDTO;
 import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
 import jsges.nails.domain.servicios.TipoServicio;
@@ -72,13 +73,17 @@ public class ServicioService implements IServicioService {
     public ServicioDTO guardar(ServicioDTO model) {
 
         Integer idCliente = model.cliente;
+        Cliente cliente = clienteService.obtenerPorId(idCliente);
 
+        /**
         Servicio newModel =  new Servicio();
         newModel.setCliente(ClienteMapper.toEntity(clienteService.buscarPorId(idCliente)));
         newModel.setFechaRegistro(model.fechaRegistro);
         newModel.setFechaRealizacion(model.fechaRealizacion);
         newModel.setEstado(0);
+         */
 
+        Servicio newModel = ServicioMapper.toEntity(model, cliente);
         Servicio servicioGuardado= modelRepository.save(newModel);
         for (ItemServicioDTO elemento : model.listaItems) {
             double precio = elemento.getPrecio();

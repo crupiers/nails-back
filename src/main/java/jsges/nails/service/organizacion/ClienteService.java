@@ -113,4 +113,14 @@ public class ClienteService implements IClienteService {
         return ClienteMapper.toDTO(clienteRepository.save(modelRecibido));
     }
 
+    @Override
+    public Cliente obtenerPorId(Integer id) {
+
+        Cliente cliente =  clienteRepository.findById(id).orElse(null);
+        if(cliente == null)
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+
+        return cliente;
+    }
+
 }

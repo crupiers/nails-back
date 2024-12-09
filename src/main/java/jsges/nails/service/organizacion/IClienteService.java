@@ -24,4 +24,6 @@ public interface IClienteService {
 
     public ClienteDTO actualizar(Integer id, Cliente modelRecibido);
 
+    public Cliente obtenerPorId (Integer id);
+
 }
