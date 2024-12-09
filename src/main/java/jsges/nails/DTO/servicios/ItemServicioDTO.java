@@ -28,12 +28,13 @@ public class ItemServicioDTO  {
     private Double precio;
 
     public ItemServicioDTO(ItemServicio model) {
+        this.id = model.getId();
         this.observacion=model.getObservacion();
         this.precio=model.getPrecio();
         //this.tipoServicio=model.getTipoServicio().getDenominacion();
         this.tipoServicioId=model.getTipoServicio().getId();
         this.servicioId=model.getServicio().getId();
-        this.id=model.getId();
+        this.precio=model.getPrecio();
     }
 
     public ItemServicioDTO() {

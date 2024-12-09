@@ -2,10 +2,7 @@ package jsges.nails.mappers;
 
 import jsges.nails.DTO.servicios.ServicioDTO;
 import jsges.nails.domain.organizacion.Cliente;
-import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
-
-import java.util.List;
 
 public abstract class ServicioMapper {
 
@@ -15,7 +12,7 @@ public abstract class ServicioMapper {
         }
         ServicioDTO dto = new ServicioDTO();
         dto.setId(entity.getId());
-        dto.setCliente(entity.getCliente().getId());
+        dto.setClienteId(entity.getCliente().getId());
         dto.setFechaRegistro(entity.getFechaRegistro());
         dto.setFechaRealizacion(entity.getFechaRealizacion());
         dto.setTotal(entity.getTotal());

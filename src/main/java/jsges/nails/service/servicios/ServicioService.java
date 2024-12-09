@@ -1,14 +1,11 @@
 package jsges.nails.service.servicios;
-import jsges.nails.DTO.articulos.ArticuloVentaDTO;
 import jsges.nails.DTO.servicios.ItemServicioDTO;
 import jsges.nails.DTO.servicios.ServicioDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
 import jsges.nails.domain.servicios.TipoServicio;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.mappers.ClienteMapper;
 import jsges.nails.mappers.ServicioMapper;
 import jsges.nails.repository.servicios.ServicioRepository;
 import jsges.nails.service.organizacion.IClienteService;
@@ -19,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -72,7 +68,7 @@ public class ServicioService implements IServicioService {
     @Override
     public ServicioDTO guardar(ServicioDTO model) {
 
-        Integer idCliente = model.cliente;
+        Integer idCliente = model.clienteId;
         Cliente cliente = clienteService.obtenerPorId(idCliente);
 
         /**

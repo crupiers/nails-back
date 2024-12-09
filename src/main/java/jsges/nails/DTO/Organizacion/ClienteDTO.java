@@ -29,9 +29,12 @@ public class ClienteDTO  {
     public ClienteDTO(Cliente model) {
         this.id = model.getId();
         this.razonSocial=model.getRazonSocial();
+        this.letra = model.getLetra();
+        this.contacto = model.getContacto();
         this.celular=model.getCelular();
         this.mail=model.getMail();
-
+        this.fechaInicio = model.getFechaInicio();
+        this.fechaNacimiento = model.getFechaNacimiento();
     }
 
     public ClienteDTO( ) {

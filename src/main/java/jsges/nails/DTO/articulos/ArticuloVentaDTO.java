@@ -29,6 +29,7 @@ public class ArticuloVentaDTO {
         this.id = model.getId();
         this.denominacion=model.getDenominacion();
         this.linea=model.getLinea().getId();
+        this.observacion = model.getObservacion();
     }
 
     public ArticuloVentaDTO( ) {
