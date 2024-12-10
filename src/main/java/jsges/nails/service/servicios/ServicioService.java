@@ -42,9 +42,9 @@ public class ServicioService implements IServicioService {
         List<Servicio> servicios = modelRepository.buscarNoEliminados();
         List<ServicioDTO> lista =new ArrayList<>();
         for (Servicio elemento : servicios) {
-            System.out.println("1"); // Debug: Verificar el contenido
-            List<ItemServicio> items = itemServicioService.listar();
-            System.out.println("3"); // Debug: Verificar el contenido
+            //System.out.println("1"); // Debug: Verificar el contenido
+            List<ItemServicio> items = itemServicioService.buscarPorServicio(elemento.getId());
+            //System.out.println("3"); // Debug: Verificar el contenido
             ServicioDTO ser  = new ServicioDTO(elemento,items);
             lista.add(ser);
         }
