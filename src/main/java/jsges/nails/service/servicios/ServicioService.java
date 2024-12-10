@@ -68,7 +68,7 @@ public class ServicioService implements IServicioService {
     @Override
     public ServicioDTO guardar(ServicioDTO model) {
 
-        Integer idCliente = model.clienteId;
+        Integer idCliente = model.cliente;
         Cliente cliente = clienteService.obtenerPorId(idCliente);
 
         /**
