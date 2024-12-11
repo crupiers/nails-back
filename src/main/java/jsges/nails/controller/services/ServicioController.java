@@ -72,5 +72,11 @@ public class ServicioController {
         return ResponseEntity.ok(modelService.eliminar(id));
     }
 
+    @PutMapping("/servicios/{id}")
+    public ResponseEntity<ServicioDTO> actualizar(@PathVariable Integer id,
+                                                  @Valid @RequestBody ServicioDTO model) {
+        return ResponseEntity.ok(modelService.actualizar(id, model));
+    }
+
 }
 

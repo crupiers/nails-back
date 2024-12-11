@@ -26,5 +26,6 @@ public interface IServicioService {
 
     public Void eliminar(Integer id);
 
+    public ServicioDTO actualizar(Integer id, ServicioDTO model);
 
 }

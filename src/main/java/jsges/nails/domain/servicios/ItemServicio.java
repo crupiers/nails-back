@@ -47,6 +47,6 @@ public class ItemServicio {
         this.servicio = servicio;
         this.tipoServicio = tipoServicio;
         this.precio = precio;
-        this.setObservacion(observacion);
+        this.observacion = observacion;
     }
 }

@@ -13,6 +13,7 @@ public abstract class ServicioMapper {
         ServicioDTO dto = new ServicioDTO();
         dto.setId(entity.getId());
         dto.setCliente(entity.getCliente().getId());
+        dto.setClienteRazonSocial(entity.getCliente().getRazonSocial());
         dto.setFechaRegistro(entity.getFechaRegistro());
         dto.setFechaRealizacion(entity.getFechaRealizacion());
         dto.setTotal(entity.getTotal());

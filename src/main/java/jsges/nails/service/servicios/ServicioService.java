@@ -6,6 +6,7 @@ import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
 import jsges.nails.domain.servicios.TipoServicio;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.mappers.ItemServicioMapper;
 import jsges.nails.mappers.ServicioMapper;
 import jsges.nails.repository.servicios.ServicioRepository;
 import jsges.nails.service.organizacion.IClienteService;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ServicioService implements IServicioService {
@@ -149,6 +151,30 @@ public class ServicioService implements IServicioService {
         model.asEliminado();
         modelRepository.save(model);
         return null;
+    }
+
+    public ServicioDTO actualizar(Integer id, ServicioDTO model) {
+        Servicio servicioActualizado = modelRepository.findById(id).orElse(null);
+
+        if(servicioActualizado == null)
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+        if(!id.equals(model.getId())) {
+            throw  new IllegalArgumentException();
+        }
+
+        Cliente cliente = clienteService.obtenerPorId(model.getCliente());
+        servicioActualizado = ServicioMapper.toEntity(model, cliente);
+
+        Set<ItemServicioDTO> items = model.getListaItems();
+        for (ItemServicioDTO item : items) {
+
+            TipoServicio tipoServicioActualizado = tipoServicioService.buscarPorId(item.getTipoServicioId());
+            ItemServicio itemActualizado = ItemServicioMapper.toEntity(item, tipoServicioActualizado, servicioActualizado);
+            itemServicioService.guardar(itemActualizado);
+
+        }
+
+        return ServicioMapper.toDTO(modelRepository.save(servicioActualizado));
     }
 
 }
