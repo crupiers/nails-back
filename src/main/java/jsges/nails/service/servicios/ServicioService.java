@@ -8,6 +8,7 @@ import jsges.nails.domain.servicios.TipoServicio;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
 import jsges.nails.mappers.ItemServicioMapper;
 import jsges.nails.mappers.ServicioMapper;
+import jsges.nails.repository.servicios.ItemServicioRepository;
 import jsges.nails.repository.servicios.ServicioRepository;
 import jsges.nails.service.organizacion.IClienteService;
 import org.slf4j.Logger;
@@ -175,6 +176,23 @@ public class ServicioService implements IServicioService {
         }
 
         return ServicioMapper.toDTO(modelRepository.save(servicioActualizado));
+    }
+
+    public List<ItemServicioDTO> getDetalleServicio(Integer id) {
+        List<ItemServicioDTO> itemsDTO = new ArrayList<>();
+
+        Servicio servicio = modelRepository.findById(id).orElse(null);
+        if(servicio == null) {
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+        }
+
+        List<ItemServicio> items = itemServicioService.buscarPorServicio(id);
+        for(ItemServicio entity : items){
+            ItemServicioDTO dto = ItemServicioMapper.toDTO(entity);
+            itemsDTO.add(dto);
+        }
+
+        return itemsDTO;
     }
 
 }

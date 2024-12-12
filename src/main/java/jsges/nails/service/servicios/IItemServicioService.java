@@ -16,7 +16,7 @@ public interface IItemServicioService {
 
    // public Page<ItemServicio> findPaginated(Pageable pageable,List<ItemServicio> servicios);
 
-    public Page<ItemServicio> getItemServicios(Pageable pageable);
+   // public Page<ItemServicio> getItemServicios(Pageable pageable);
 
     public List<ItemServicio> buscarPorServicio(Integer idServicio);
 }

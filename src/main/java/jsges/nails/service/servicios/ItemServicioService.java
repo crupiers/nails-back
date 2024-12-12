@@ -48,13 +48,15 @@ public class ItemServicioService implements IItemServicioService {
     }
      */
 
+    /**
     @Override
     public Page<ItemServicio> getItemServicios(Pageable pageable) {
         return null;
     }
+     */
+
     @Override
     public List<ItemServicio> buscarPorServicio(Integer idServicio){
-
         return modelRepository.buscarPorServicio(idServicio);
     };
 }

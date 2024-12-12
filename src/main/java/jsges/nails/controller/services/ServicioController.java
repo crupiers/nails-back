@@ -78,5 +78,10 @@ public class ServicioController {
         return ResponseEntity.ok(modelService.actualizar(id, model));
     }
 
+    @GetMapping("servicio/detalle/{id}")
+    public ResponseEntity<List<ItemServicioDTO>> getDetalleServicio(@PathVariable Integer id) {
+        return ResponseEntity.ok(modelService.getDetalleServicio(id));
+    }
+
 }
 

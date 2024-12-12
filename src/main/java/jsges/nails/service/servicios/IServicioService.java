@@ -1,5 +1,6 @@
 package jsges.nails.service.servicios;
 
+import jsges.nails.DTO.servicios.ItemServicioDTO;
 import jsges.nails.DTO.servicios.ServicioDTO;
 import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.articulos.ArticuloVenta;
@@ -27,5 +28,7 @@ public interface IServicioService {
     public Void eliminar(Integer id);
 
     public ServicioDTO actualizar(Integer id, ServicioDTO model);
+
+    public List<ItemServicioDTO> getDetalleServicio(Integer id);
 
 }
